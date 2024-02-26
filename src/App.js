@@ -3,6 +3,7 @@ import './App.css';
 import styled from 'styled-components';
 import MenuBar from './components/MenuBar';
 import Board from './components/Board';
+import { ListProvider } from './context/ListsContext';
 
 const rootStyles = {
   backgroundColor: '#555555', 
@@ -26,10 +27,12 @@ function App() {
           Trello (cover by Ivan)
         </div>
       </Header>
-
-      <MenuBar />
-
-      <Board />
+      
+        <MenuBar />
+      
+      <ListProvider>
+        <Board />
+      </ListProvider>
     </div>
   );
 }
