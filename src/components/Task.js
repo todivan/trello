@@ -12,10 +12,16 @@ const Container = styled.div`
     width:130px;
 `;
 
-const Task = () => {
+const Description = styled.p`
+    margin: 5px;
+    font-size:10px
+`;
+
+const Task = (props) => {
     return(
         <Container>
-
+            <h3>{props.task.name}</h3>
+            <Description>{props.task.description}</Description>
         </Container>
     );
 }

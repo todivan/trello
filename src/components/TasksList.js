@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Task from "./Task";
+import { TaskProvider, useTasks } from "../context/TaskContext";
 
 const Container = styled.div`
     margin: 5px;
@@ -12,6 +13,7 @@ const Container = styled.div`
     max-width: 160px;
     width:160px;
     display: inline-block;
+    vertical-align: top;
 `;
 
 const ListName = styled.div`
@@ -41,13 +43,46 @@ const ListDescription = styled.div`
     display: inline-block;
 `;
 
+const AddTaskButton = styled.button`
+background-color: #008CBA;
+color: white;
+font-size: 16px;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+margin: 10px;
+
+&:hover {
+background-color: darkblue;
+}
+`;
+
+
 const TasksList = (props) => {
+
+    const {collectionOfTasks, setCollectionOfTasks} = useTasks();
+
+    const addNewTask = () => {
+        const newObject = {
+          id: collectionOfTasks.length + 1,
+          name: `Name ${collectionOfTasks.length + 1}`,
+          listName: props.list.name,
+          description: `Description ${collectionOfTasks.length + 1}`,
+        };
+        setCollectionOfTasks(prevList => [...prevList, newObject]);
+      };
+
     return(
         <Container>
-            <ListName>{props.list.name}</ListName> 
-            <ListDescription>{props.list.description}</ListDescription> 
-            <Task/>
-            <Task/>
+            <TaskProvider>
+                <ListName>{props.list.name}</ListName> 
+                <ListDescription>{props.list.description}</ListDescription> 
+                {collectionOfTasks.filter(x => x.listName === props.list.name).map((item) => (
+                    <Task key={item.id} task={item} />
+                ))} 
+                <AddTaskButton onClick={addNewTask}>Add task</AddTaskButton>
+            </TaskProvider>
         </Container>
     );
 }
