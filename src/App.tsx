@@ -1,8 +1,8 @@
 
 import './App.css';
 import styled from 'styled-components';
-import MenuBar from './components/MenuBar';
-import Board from './components/Board';
+import MenuBar from './components/MenuBar/MenuBar';
+import Board from './components/Board/Board';
 import { ListProvider } from './context/ListsContext';
 
 const rootStyles = {

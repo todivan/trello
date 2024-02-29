@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-const Container = styled.div`
+export const Container = styled.div`
   margin: 5px;
   background-color: green;
   padding: 10px;
 `;
 
-const Button = styled.button`
+export const Button = styled.button<{ primary?: boolean }>`
     background-color: ${props => props.primary ? 'blue' : 'gray'};
     color: white;
     font-size: 16px;
@@ -20,14 +20,3 @@ const Button = styled.button`
     background-color: ${props => props.primary ? 'darkblue' : 'darkgray'};
     }
 `;
-
-const MenuBar = () => {
-    return (
-        <Container>
-            <Button primary >Menu action 1</Button>
-            <Button>Menu action 2</Button>
-        </Container>
-    );
-}
-
-export default MenuBar;
