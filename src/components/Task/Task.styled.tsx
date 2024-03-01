@@ -12,7 +12,12 @@ export const Container = styled.div`
     width:130px;
 `;
 
-export const Description = styled.p`
+interface Props {
+    isVisible: boolean;
+  }
+
+export const Description = styled.p<Props>`
     margin: 5px;
     font-size:10px
+    display: ${p => p.isVisible ? 'block' : 'none'}
 `;
