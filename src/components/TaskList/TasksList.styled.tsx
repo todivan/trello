@@ -8,8 +8,8 @@ export const Container = styled.div`
     border-style: solid;
     border-radius: 2px;
     border-radius: 10px;
-    max-width: 160px;
-    width:160px;
+    max-width: 2100px;
+    width:210px;
     display: inline-block;
     vertical-align: top;
 `;
@@ -22,8 +22,8 @@ export const ListName = styled.div`
     border-style: solid;
     border-radius: 2px;
     border-radius: 10px;
-    max-width: 130px;
-    width:130px;
+    max-width: 180px;
+    width:180px;
     display: inline-block;
 `;
 
@@ -35,8 +35,8 @@ export const ListDescription = styled.div`
     border-style: solid;
     border-radius: 2px;
     border-radius: 10px;
-    max-width: 130px;
-    width:130px;
+    max-width: 180px;
+    width:180px;
     font-size: 12px;
     display: inline-block;
 `;

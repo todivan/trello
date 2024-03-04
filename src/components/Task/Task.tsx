@@ -1,9 +1,16 @@
 import { useState } from "react";
-import { Container, Description } from "./Task.styled";
-import ModeIcon from '@mui/icons-material/Mode';
-import { TextField } from "@mui/material";
+//import { Container } from "./Task.styled";
+import { Box, TextField } from "@mui/material";
+import TaskView from "./TaskView";
+import { TTask } from "../../types/CommonTypes";
 
-const Task = (props) => {
+type TTaskProps = {
+    key: React.Key;
+    task: TTask;
+    updateTask: (updatedItem: TTask) => void;
+  };
+
+const Task: React.FC<TTaskProps> = ({ key, task, updateTask }) => {
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -11,40 +18,45 @@ const Task = (props) => {
         setIsEdit(true);
     };
 
-    const endEdit = () => {
-        setIsEdit(false);
-    };
-
     const keyPress = (e) => {
         if(e.keyCode === 13){
            setIsEdit(false);
-           props.task.description = e.target.value;
+           task.name = e.target.value;
+           updateTask(task);
         } else if (e.keyCode === 27) {
             setIsEdit(false);
         }
      }
 
     return(
-        <Container>
-            <h3>{props.task.name}</h3>
+        <Box
+        height={50}
+        width={180}
+        my={4}
+        display="flex"
+        alignItems="center"
+        gap={4}
+        p={2}
+        sx={{ border: '2px solid white' }}
+      >
             {isEdit ? 
             <TextField
                 id="outlined-multiline-static"
-                label="Multiline"
+                label="Edit name"
                 multiline
-                rows={4}
-                defaultValue={props.task.description}
+                minRows={2}
+                maxRows={8}
+                defaultValue={task.name}
                 onKeyDown={keyPress}
+                autoFocus={true}
+                onFocus={event => {
+                    event.target.select();
+                }}
             />
             :
-            <Description isVisible={!isEdit}>
-                <div>
-                    {props.task.description}
-                </div>
-                <ModeIcon onClick={switchToEdit}></ModeIcon>
-            </Description>
+            <TaskView name={task.name} switchToEdit={switchToEdit} />
             }
-        </Container>
+        </Box>
     );
 }
 
