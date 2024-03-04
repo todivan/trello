@@ -1,38 +1,33 @@
 
 import './App.css';
-import styled from 'styled-components';
-import MenuBar from './components/MenuBar/MenuBar';
-import Board from './components/Board/Board';
+import styled, { ThemeProvider } from 'styled-components';
 import { ListProvider } from './context/ListsContext';
+import theme from './theme/Theme';
+import SearchAppBar from './components/MenuBar/AppBar';
+import Content from './components/Content/Content';
 
 const rootStyles = {
   backgroundColor: '#555555', 
   minHeight: '100vh', 
-  padding: '20px', 
+  padding: '5px', 
 };
 
 const Header = styled.div`
-  margin: 10px;
   font-family: Avenir;
   color: #FFFFFF;
-  background-color: green;
-  padding: 5px
+  background-color: #0000007d;
 `;
 
 function App() {
   return (
     <div className="App" style={rootStyles}>
-      <Header>
-        <div>
-          Trello (cover by Ivan)
-        </div>
-      </Header>
-      
-        <MenuBar />
-      
-      <ListProvider>
-        <Board />
-      </ListProvider>
+      <ThemeProvider theme={theme}>
+        <SearchAppBar />
+        
+        <ListProvider>
+          <Content />
+        </ListProvider>
+      </ThemeProvider>
     </div>
   );
 }

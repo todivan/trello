@@ -1,8 +1,7 @@
 import { useState } from "react";
-//import { Container } from "./Task.styled";
-import { Box, TextField } from "@mui/material";
-import TaskView from "./TaskView";
+import { OutlinedInput, TextField } from "@mui/material";
 import { TTask } from "../../types/CommonTypes";
+import ModeIcon from '@mui/icons-material/Mode';
 
 type TTaskProps = {
     key: React.Key;
@@ -29,16 +28,7 @@ const Task: React.FC<TTaskProps> = ({ key, task, updateTask }) => {
      }
 
     return(
-        <Box
-        height={50}
-        width={180}
-        my={4}
-        display="flex"
-        alignItems="center"
-        gap={4}
-        p={2}
-        sx={{ border: '2px solid white' }}
-      >
+        <>
             {isEdit ? 
             <TextField
                 id="outlined-multiline-static"
@@ -52,11 +42,26 @@ const Task: React.FC<TTaskProps> = ({ key, task, updateTask }) => {
                 onFocus={event => {
                     event.target.select();
                 }}
+                onBlur={() => {
+                    setIsEdit(false);
+                }}
             />
             :
-            <TaskView name={task.name} switchToEdit={switchToEdit} />
+            <OutlinedInput
+                id="outlined-adornment-weight"
+                multiline
+                minRows={1}
+                maxRows={8}
+                defaultValue={task.name}
+                endAdornment={<ModeIcon fontSize="small" onClick={switchToEdit} cursor='pointer'></ModeIcon>}
+                aria-describedby="outlined-weight-helper-text"
+                sx={{ border: '0px solid white', width:250, cursor: 'pointer' }}
+                inputProps={{
+                'aria-label': 'weight', readOnly: true,
+                }}
+            />
             }
-        </Box>
+        </>
     );
 }
 
