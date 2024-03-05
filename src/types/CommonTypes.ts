@@ -21,3 +21,9 @@ export type TTaskContextType = {
   collectionOfTasks: TTask[];
   setCollectionOfTasks: React.Dispatch<React.SetStateAction<TTask[]>>;
 };
+
+export type TListProps = {
+  key: React.Key;
+  list: TList;
+  updateList: (updatedItem: TList) => void;
+};

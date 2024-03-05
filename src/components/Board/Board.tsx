@@ -9,7 +9,7 @@ const Board = () => {
 
 
     return( 
-        <Stack spacing={2} sx={{ padding:'0px 0px 0px 15px'}}>
+        <Stack width="100%" spacing={2} sx={{ padding:'0px 0px 0px 15px'}}>
             <BoardBar />
             <BoardContent />
         </Stack>

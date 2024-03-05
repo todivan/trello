@@ -1,11 +1,11 @@
 import Task from "../Task/Task";
 import { TaskProvider, useTasks } from "../../context/TaskContext";
-import { TTask } from "../../types/CommonTypes";
-import { Box, Button, OutlinedInput, Stack } from "@mui/material";
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { TListProps, TTask } from "../../types/CommonTypes";
+import { Box, Button, Stack } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
+import ListHeader from "./ListHeader";
 
-const TasksList = (props) => {
+const TasksList: React.FC<TListProps> = ({ key, list, updateList }) => {
 
     const {collectionOfTasks, setCollectionOfTasks} = useTasks();
 
@@ -17,35 +17,19 @@ const TasksList = (props) => {
         const newObject = {
           id: collectionOfTasks.length + 1,
           name: `Name ${collectionOfTasks.length + 1}`,
-          listName: props.list.name,
+          listName: list.name,
           description: `Description ${collectionOfTasks.length + 1}`,
         };
         setCollectionOfTasks(prevList => [...prevList, newObject]);
       };
 
-      const openListDetails = () => {
-        alert("Open list details");
-      }
-
     return(
-
         <TaskProvider>
-            <Box sx={{ bgcolor:'#323a48', padding: '10px' }}>
+            <Box borderRadius={3} sx={{ bgcolor:'#323a48', padding: '10px' }}>
                 <Stack spacing={2}>
-                    <OutlinedInput
-                        id="outlined-adornment-weight"
-                        multiline
-                        minRows={1}
-                        maxRows={8}
-                        defaultValue={props.list.name}
-                        endAdornment={<MoreHorizIcon fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>}
-                        aria-describedby="outlined-weight-helper-text"
-                        sx={{ border: '0px solid white', width:250 }}
-                        inputProps={{
-                        'aria-label': 'weight', readOnly: true,
-                        }}
-                    />
-                    {collectionOfTasks.filter(x => x.listName === props.list.name).map((item) => (
+                    <ListHeader key={key} list={list} updateList={updateList} />
+
+                    {collectionOfTasks.filter(x => x.listName === list.name).map((item) => (
                         <Task key={item.id} task={item} updateTask={updateTask} />
                     ))} 
 

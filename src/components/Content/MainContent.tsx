@@ -2,9 +2,10 @@ import { Stack } from "@mui/material";
 import LeftMenu from "../LeftMenu/LeftMenu";
 import Board from "../Board/Board";
 
-const Content = () => {
+const MainContent = () => {
     return (
         <Stack
+            width="100%" 
             direction="row"
             justifyContent="flex-start"
             alignItems="flex-start"
@@ -16,4 +17,4 @@ const Content = () => {
     );
 }
 
-export default Content;
+export default MainContent;
