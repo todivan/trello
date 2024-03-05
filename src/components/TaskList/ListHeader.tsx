@@ -14,10 +14,11 @@ const ListHeader: React.FC<TListProps> = ({ key, list, updateList })=> {
         setIsEdit(true);
     };
 
-    const keyPress = (e) => {
+    const keyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.keyCode === 13){
            setIsEdit(false);
-           list.name = e.target.value;
+           const inputElement = e.target as HTMLInputElement; 
+            list.name = inputElement.value;
            updateList(list);
         } else if (e.keyCode === 27) {
             setIsEdit(false);

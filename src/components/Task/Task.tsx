@@ -17,10 +17,11 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
         setIsEdit(true);
     };
 
-    const keyPress = (e) => {
+    const keyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.keyCode === 13){
            setIsEdit(false);
-           task.name = e.target.value;
+           const inputElement = e.target as HTMLInputElement; 
+           task.name = inputElement.value;
            updateTask(task);
         } else if (e.keyCode === 27) {
             setIsEdit(false);
@@ -60,7 +61,7 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
                 endAdornment={<ModeIcon fontSize="small" onClick={switchToEdit} cursor='pointer'></ModeIcon>}
                 aria-describedby="outlined-weight-helper-text"
                 sx={{ border: '0px solid white', borderRadius:3, width:250, cursor: 'pointer' }}
-                //onClick={openTaskDetails}
+                onDoubleClick={openTaskDetails}
                 inputProps={{
                 'aria-label': 'weight', readOnly: true,
                 }}
