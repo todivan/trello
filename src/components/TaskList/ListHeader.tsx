@@ -15,12 +15,12 @@ const ListHeader: React.FC<TListProps> = ({ key, list, updateList })=> {
     };
 
     const keyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.keyCode === 13){
+        if(e.key === 'Enter'){
            setIsEdit(false);
            const inputElement = e.target as HTMLInputElement; 
             list.name = inputElement.value;
            updateList(list);
-        } else if (e.keyCode === 27) {
+        } else if (e.key === 'Escape') {
             setIsEdit(false);
         }
      }

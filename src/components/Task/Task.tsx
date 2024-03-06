@@ -18,12 +18,12 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
     };
 
     const keyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.keyCode === 13){
+        if(e.key === 'Enter'){
            setIsEdit(false);
            const inputElement = e.target as HTMLInputElement; 
            task.name = inputElement.value;
            updateTask(task);
-        } else if (e.keyCode === 27) {
+        } else if (e.key === 'Escape') {
             setIsEdit(false);
         }
      }
@@ -43,7 +43,7 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
                 maxRows={8}
                 defaultValue={task.name}
                 onKeyDown={keyPress}
-                autoFocus={true}
+                autoFocus={isEdit}
                 onFocus={event => {
                     event.target.select();
                 }}

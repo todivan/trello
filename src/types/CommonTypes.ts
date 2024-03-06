@@ -13,7 +13,7 @@ export type TListContextType = {
 export type TTask = {
   id: number;
   name: string;
-  listName: string;
+  listId: number;
   description: string;
 };
 

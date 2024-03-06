@@ -5,8 +5,8 @@ const TaskContext = createContext<TTaskContextType | null>(null);
 
 export const TaskProvider: React.FC<{children: React.ReactNode}>  = ({ children }) => {
    const [collectionOfTasks, setCollectionOfTasks] = useState<TTask[]>([
-     { id: 1, name: 'Crate adapter class', listName: 'To do', description: 'Create class that will addapt Trelo interface with client API' },
-     { id: 2, name: 'Unit test for adapter', listName: 'In progress', description: 'Unit testing for adapter functionality at least 80%' },
+     { id: 1, name: 'Crate adapter class', listId: 1, description: 'Create class that will addapt Trelo interface with client API' },
+     { id: 2, name: 'Unit test for adapter', listId: 2, description: 'Unit testing for adapter functionality at least 80%' },
    ]);
 
   return (

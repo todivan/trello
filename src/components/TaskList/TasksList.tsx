@@ -17,7 +17,7 @@ const TasksList: React.FC<TListProps> = ({ key, list, updateList }) => {
         const newObject = {
           id: collectionOfTasks.length + 1,
           name: `Name ${collectionOfTasks.length + 1}`,
-          listName: list.name,
+          listId: list.id,
           description: `Description ${collectionOfTasks.length + 1}`,
         };
         setCollectionOfTasks(prevList => [...prevList, newObject]);
@@ -29,7 +29,7 @@ const TasksList: React.FC<TListProps> = ({ key, list, updateList }) => {
                 <Stack spacing={2}>
                     <ListHeader key={key} list={list} updateList={updateList} />
 
-                    {collectionOfTasks.filter(x => x.listName === list.name).map((item) => (
+                    {collectionOfTasks.filter(x => x.listId === list.id).map((item) => (
                         <Task key={item.id} task={item} updateTask={updateTask} />
                     ))} 
 
