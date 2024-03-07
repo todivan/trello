@@ -33,7 +33,7 @@ const TasksList: React.FC<TListProps> = ({ key, list, updateList }) => {
                         <Task key={item.id} task={item} updateTask={updateTask} />
                     ))} 
 
-                    <Button variant="outlined" startIcon={<AddIcon />} onClick={addNewTask}>
+                    <Button variant="outlined" sx={{ color:'white' }} startIcon={<AddIcon />} onClick={addNewTask}>
                     Add a card
                     </Button>
                 </Stack>
