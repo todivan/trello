@@ -4,6 +4,7 @@ import { TListProps, TTask } from "../../types/CommonTypes";
 import { Box, Button, Stack } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ListHeader from "./ListHeader";
+import ListMoveNavigation from "./ListMoveNavigation";
 
 const TasksList: React.FC<TListProps> = ({ key, list, updateList }) => {
 
@@ -28,6 +29,7 @@ const TasksList: React.FC<TListProps> = ({ key, list, updateList }) => {
             <Box borderRadius={3} sx={{ bgcolor:'#323a48', padding: '10px' }}>
                 <Stack spacing={2}>
                     <ListHeader key={key} list={list} updateList={updateList} />
+                    <ListMoveNavigation />
 
                     {collectionOfTasks.filter(x => x.listId === list.id).map((item) => (
                         <Task key={item.id} task={item} updateTask={updateTask} />
