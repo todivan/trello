@@ -2,6 +2,7 @@
 export type TList = {
   id: number;
   name: string;
+  position: number;
   description: string;
 };
 
