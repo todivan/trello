@@ -33,7 +33,7 @@ const BoardContent = () => {
                 {collectionOfLists.map((item) => (
                     <TasksList key={item.id} list={item} updateList={updateList}/>
                 ))} 
-                <Button variant="outlined" startIcon={<AddIcon />} onClick={addNewList}>
+                <Button sx={{ color:'white' }} variant="outlined" startIcon={<AddIcon />} onClick={addNewList}>
                     Add another list
                 </Button>
             </TaskProvider>

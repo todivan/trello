@@ -44,6 +44,7 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
                 defaultValue={task.name}
                 onKeyDown={keyPress}
                 autoFocus={isEdit}
+                sx={{  color:'white' }}
                 onFocus={event => {
                     event.target.select();
                 }}
@@ -60,7 +61,7 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
                 defaultValue={task.name}
                 endAdornment={<ModeIcon fontSize="small" onClick={switchToEdit} cursor='pointer'></ModeIcon>}
                 aria-describedby="outlined-weight-helper-text"
-                sx={{ border: '0px solid white', borderRadius:3, width:250, cursor: 'pointer' }}
+                sx={{ border: '0px solid white', borderRadius:3, width:250, cursor: 'pointer', color:'white' }}
                 onDoubleClick={openTaskDetails}
                 inputProps={{
                 'aria-label': 'weight', readOnly: true,

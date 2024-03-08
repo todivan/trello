@@ -38,6 +38,7 @@ const ListHeader: React.FC<TListProps> = ({ key, list, updateList })=> {
                     aria-describedby="outlined-weight-helper-text"
                     onKeyDown={keyPress}
                     autoFocus={true}
+                    sx={{ cursor: 'pointer', color:'white' }}
                     onFocus={event => {
                         event.target.select();
                     }}
@@ -51,11 +52,11 @@ const ListHeader: React.FC<TListProps> = ({ key, list, updateList })=> {
                 <Grid container spacing={2} sx={{ border: '0px', width:250, padding:2, cursor: 'pointer'}} >
                     <Grid xs={10}>
                         <div onClick={switchToEdit}>
-                            <Box display="flex"><b>{list.name}</b></Box>
+                            <Box display="flex" color={"white"}><b>{list.name}</b></Box>
                         </div>
                     </Grid>
                     <Grid xs={2}>
-                        <MoreHorizIcon fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>
+                        <MoreHorizIcon sx={{ cursor: 'pointer', color:'white' }} fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>
                     </Grid>
                 </Grid>
                 
