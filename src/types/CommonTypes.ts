@@ -27,4 +27,15 @@ export type TListProps = {
   key: React.Key;
   list: TList;
   updateList: (updatedItem: TList) => void;
+  changePosition: (listId: number, offset: number) => void;
+};
+
+export type TListHeaderProps = {
+  list: TList;
+  updateList: (updatedItem: TList) => void;
+};
+
+export type TListMoveNavigationProps = {
+  listId: number, 
+  changePosition: (listId: number, offset: number) => void;
 };

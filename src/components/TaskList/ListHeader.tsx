@@ -1,9 +1,9 @@
 import { Grid, OutlinedInput, Box } from "@mui/material"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { TListProps } from "../../types/CommonTypes";
+import { TListHeaderProps } from "../../types/CommonTypes";
 import { useState } from "react";
 
-const ListHeader: React.FC<TListProps> = ({ key, list, updateList })=> {
+const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
     const openListDetails = () => {
         alert("List details \n\n Name: " + list.name + "\n\n Description: " + list.description);
     }

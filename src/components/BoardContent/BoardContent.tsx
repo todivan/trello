@@ -69,7 +69,7 @@ const BoardContent = () => {
         >
             <TaskProvider>
                 {sortedLists.map((item) => (
-                    <TasksList key={item.id} list={item} updateList={updateList}/>
+                    <TasksList key={item.id} list={item} updateList={updateList} changePosition={changePosition}/>
                 ))} 
                 <Button sx={{ color:'white' }} variant="outlined" startIcon={<AddIcon />} onClick={addNewList}>
                     Add another list
