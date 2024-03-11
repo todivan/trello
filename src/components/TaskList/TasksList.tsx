@@ -27,10 +27,12 @@ const TasksList: React.FC<TListProps> = ({ key, list, updateList, changePosition
     return(
         <TaskProvider>
             <Box borderRadius={3} sx={{ bgcolor:'#323a48', padding: '10px' }}>
-                <Stack spacing={2}>
-                    <ListHeader list={list} updateList={updateList}/>
-                    <ListMoveNavigation listId={list.id} changePosition={changePosition}/>
-
+                <Stack spacing={1}>
+                    <Box>
+                        <ListHeader list={list} updateList={updateList}/>
+                        <ListMoveNavigation listId={list.id} changePosition={changePosition}/>
+                    </Box>
+                    
                     {collectionOfTasks.filter(x => x.listId === list.id).map((item) => (
                         <Task key={item.id} task={item} updateTask={updateTask} />
                     ))} 
