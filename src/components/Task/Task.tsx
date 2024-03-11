@@ -7,11 +7,12 @@ type TTaskProps = {
     key: React.Key;
     task: TTask;
     updateTask: (updatedItem: TTask) => void;
+    isFocusOnNew: boolean;
   };
 
-const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
+const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew }) => {
 
-    const [isEdit, setIsEdit] = useState(false);
+    const [isEdit, setIsEdit] = useState(isFocusOnNew);
 
     const switchToEdit = () => {
         setIsEdit(true);
@@ -33,7 +34,7 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
     }
 
     return(
-        <Box>
+        <>
             {isEdit ? 
             <TextField
                 id="outlined-multiline-static"
@@ -44,7 +45,7 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
                 defaultValue={task.name}
                 onKeyDown={keyPress}
                 autoFocus={isEdit}
-                sx={{  color:'white' }}
+                sx={{  color:'white', padding:'10px 0px 10px 0px' }}
                 onFocus={event => {
                     event.target.select();
                 }}
@@ -61,14 +62,14 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask }) => {
                 defaultValue={task.name}
                 endAdornment={<ModeIcon fontSize="small" onClick={switchToEdit} cursor='pointer'></ModeIcon>}
                 aria-describedby="outlined-weight-helper-text"
-                sx={{ border: '0px solid white', borderRadius:3, width:250, cursor: 'pointer', color:'white' }}
+                sx={{ border: '0px solid white', borderRadius:3, width:250, cursor: 'pointer', color:'white'}}
                 onDoubleClick={openTaskDetails}
                 inputProps={{
                 'aria-label': 'weight', readOnly: true,
                 }}
             />
             }
-        </Box>
+        </>
     );
 }
 

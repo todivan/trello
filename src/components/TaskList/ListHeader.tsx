@@ -26,7 +26,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
      }
 
     return (
-        <Box>
+        <>
             {isEdit ? 
                 <OutlinedInput
                     id="outlined-adornment-weight"
@@ -37,7 +37,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
                     aria-describedby="outlined-weight-helper-text"
                     onKeyDown={keyPress}
                     autoFocus={true}
-                    sx={{ cursor: 'pointer', color:'white' }}
+                    sx={{ cursor: 'pointer', color:'white', padding:'10px 0px 10px 0px' }}
                     onFocus={event => {
                         event.target.select();
                     }}
@@ -59,7 +59,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
                     </Grid>
                 </Grid>
             }
-        </Box>
+        </>
     );
 }
 

@@ -7,7 +7,8 @@ import SearchAppBar from './components/MenuBar/AppBar';
 import MainContent from './components/Content/MainContent';
 
 const rootStyles = {
-  backgroundColor: '#555555', 
+  backgroundColor: '#333333', 
+  width: '100vw',
   minHeight: '100vh', 
   padding: '5px', 
 };
