@@ -1,20 +1,28 @@
 import { useState } from "react";
 import { ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, TextField } from "@mui/material";
-import { TTaskProps } from "../../types/CommonTypes";
+import { TTask, TTaskProps } from "../../types/CommonTypes";
 import ModeIcon from '@mui/icons-material/Mode';
 import React from "react";
 import NorthIcon from '@mui/icons-material/North';
 import SouthIcon from '@mui/icons-material/South';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import TaskDetails from "./TaskDetails";
+import { useTasks } from "../../context/TaskContext";
 
-const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew, changeTaskPosition }) => {
+const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, changeTaskPosition }) => {
 
     const [isEdit, setIsEdit] = useState(isFocusOnNew);
 
-    const switchToEdit = () => {
+    const switchToEdit = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
         setIsEdit(true);
+        event.stopPropagation();
     };
+
+    const { setCollectionOfTasks } = useTasks();
+    const updateTask = (updatedItem: TTask) => {
+        setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
+      };
+
 
     const keyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if(e.key === 'Enter'){
@@ -30,7 +38,7 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew, changeTask
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-      setAnchorEl(event.currentTarget);
+        setAnchorEl(event.currentTarget);
     };
 
     const handleMenuClose = () => {

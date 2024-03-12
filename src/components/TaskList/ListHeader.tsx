@@ -1,10 +1,11 @@
 import { Grid, OutlinedInput, Box } from "@mui/material"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { TListHeaderProps } from "../../types/CommonTypes";
+import { TList, TListHeaderProps } from "../../types/CommonTypes";
 import { useState } from "react";
 import ListDetails from "./ListDetails";
+import { useLists } from "../../context/ListsContext";
 
-const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, updateList })=> {
+const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList })=> {
     const openListDetails = () => {
         setIsDetailsOpen(true);
     }
@@ -31,6 +32,12 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, update
             setIsEdit(false);
         }
      }
+
+     const {setCollectionOfLists} = useLists();
+
+     const updateList = (updatedItem: TList) => {
+        setCollectionOfLists(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
+    };
 
     return (
         <>

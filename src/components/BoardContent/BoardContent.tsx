@@ -4,7 +4,6 @@ import { useLists } from "../../context/ListsContext";
 import { TaskProvider } from '../../context/TaskContext';
 import { Button, Stack } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
-import { TList } from '../../types/CommonTypes';
 
 const BoardContent = () => {
     const {collectionOfLists, setCollectionOfLists} = useLists();
@@ -21,37 +20,6 @@ const BoardContent = () => {
         setNewAddedId(newObject.id);
     };
 
-    const updateList = (updatedItem: TList) => {
-        setCollectionOfLists(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
-    };
-
-    const changePosition = (listId: number, offset: number) => {
-        const index = collectionOfLists.findIndex((item) => item.id === listId);
-
-        if (index === -1) {
-            return;
-        }
-
-        const updatedList = [...collectionOfLists];
-        const itemToMove = updatedList[index];
-        const newPosition = itemToMove.position + offset;
-
-        if (newPosition < 1 || newPosition > updatedList.length) {
-            return;
-        }
-
-        updatedList.splice(index, 1);
-
-        updatedList.splice(newPosition - 1, 0, itemToMove);
-
-        updatedList.forEach((item, i) => {
-            item.position = i + 1;
-        });
-
-        // Update the context with the updated list
-        setCollectionOfLists(updatedList);
-    };
-
     const sortedLists = [...collectionOfLists]
         .sort((a, b) => a.position > b.position ? 1 : -1)
 
@@ -64,7 +32,7 @@ const BoardContent = () => {
         >
             <TaskProvider>
                 {sortedLists.map((item) => (
-                    <TasksList key={item.id} list={item} updateList={updateList} isFocusOnNewList={newAddedId === item.id} changePosition={changePosition} />
+                    <TasksList key={item.id} list={item} isFocusOnNewList={newAddedId === item.id} />
                 ))} 
                 <Button sx={{ color:'white' }} variant="outlined" startIcon={<AddIcon />} onClick={addNewList}>
                     Add another list

@@ -1,20 +1,16 @@
 import Task from "../Task/Task";
 import { TaskProvider, useTasks } from "../../context/TaskContext";
-import { TListProps, TTask } from "../../types/CommonTypes";
+import { TListProps } from "../../types/CommonTypes";
 import { Box, Button, Stack } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ListHeader from "./ListHeader";
 import ListMoveNavigation from "./ListMoveNavigation";
 import { useState } from "react";
 
-const TasksList: React.FC<TListProps> = ({ list, updateList, isFocusOnNewList,  changePosition }) => {
+const TasksList: React.FC<TListProps> = ({ list, isFocusOnNewList }) => {
 
     const {collectionOfTasks, setCollectionOfTasks} = useTasks();
     const [newAddedId, setNewAddedId] = useState<number>(-1);
-
-    const updateTask = (updatedItem: TTask) => {
-        setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
-      };
 
     const addNewTask = () => {
         const newObject = {
@@ -62,12 +58,12 @@ const TasksList: React.FC<TListProps> = ({ list, updateList, isFocusOnNewList,  
             <Box borderRadius={3} sx={{ bgcolor:'#323a48', padding: '10px' }}>
                 <Stack spacing={1}>
                     <Box>
-                        <ListHeader list={list} updateList={updateList} isFocusOnNewList={isFocusOnNewList}/>
-                        <ListMoveNavigation listId={list.id} changePosition={changePosition}/>
+                        <ListHeader list={list} isFocusOnNewList={isFocusOnNewList}/>
+                        <ListMoveNavigation listId={list.id} />
                     </Box>
                     
                     {sortedTsks.filter(x => x.listId === list.id).map((item) => (
-                        <Task key={item.id} task={item} updateTask={updateTask} isFocusOnNew={newAddedId === item.id} changeTaskPosition={changeTaskPosition} />
+                        <Task key={item.id} task={item} isFocusOnNew={newAddedId === item.id} changeTaskPosition={changeTaskPosition} />
                     ))} 
 
                     <Button variant="outlined" sx={{ color:'white' }} startIcon={<AddIcon />} onClick={addNewTask}>
