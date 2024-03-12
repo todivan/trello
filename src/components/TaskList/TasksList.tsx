@@ -21,11 +21,41 @@ const TasksList: React.FC<TListProps> = ({ key, list, updateList, changePosition
           id: collectionOfTasks.length + 1,
           name: `Name ${collectionOfTasks.length + 1}`,
           listId: list.id,
+          position: collectionOfTasks.length + 1,
           description: `Description ${collectionOfTasks.length + 1}`,
         };
         setCollectionOfTasks(prevList => [...prevList, newObject]);
         setNewAddedId(newObject.id);
       };
+
+    const changeTaskPosition = (listId: number, offset: number) => {
+        const index = collectionOfTasks.findIndex((item) => item.id === listId);
+
+        if (index === -1) {
+            return;
+        }
+
+        const updatedList = [...collectionOfTasks];
+        const itemToMove = updatedList[index];
+        const newPosition = itemToMove.position + offset;
+
+        if (newPosition < 1 || newPosition > updatedList.length) {
+            return;
+        }
+
+        updatedList.splice(index, 1);
+
+        updatedList.splice(newPosition - 1, 0, itemToMove);
+
+        updatedList.forEach((item, i) => {
+            item.position = i + 1;
+        });
+
+        setCollectionOfTasks(updatedList);
+    };
+
+    const sortedTsks = [...collectionOfTasks]
+    .sort((a, b) => a.position > b.position ? 1 : -1)
 
     return(
         <TaskProvider>
@@ -36,8 +66,8 @@ const TasksList: React.FC<TListProps> = ({ key, list, updateList, changePosition
                         <ListMoveNavigation listId={list.id} changePosition={changePosition}/>
                     </Box>
                     
-                    {collectionOfTasks.filter(x => x.listId === list.id).map((item) => (
-                        <Task key={item.id} task={item} updateTask={updateTask} isFocusOnNew={newAddedId === item.id} />
+                    {sortedTsks.filter(x => x.listId === list.id).map((item) => (
+                        <Task key={item.id} task={item} updateTask={updateTask} isFocusOnNew={newAddedId === item.id} changeTaskPosition={changeTaskPosition} />
                     ))} 
 
                     <Button variant="outlined" sx={{ color:'white' }} startIcon={<AddIcon />} onClick={addNewTask}>

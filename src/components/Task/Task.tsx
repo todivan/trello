@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, TextField } from "@mui/material";
-import { TTask } from "../../types/CommonTypes";
+import { TTaskProps } from "../../types/CommonTypes";
 import ModeIcon from '@mui/icons-material/Mode';
 import React from "react";
 import NorthIcon from '@mui/icons-material/North';
@@ -8,14 +8,7 @@ import SouthIcon from '@mui/icons-material/South';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import TaskDetails from "./TaskDetails";
 
-type TTaskProps = {
-    key: React.Key;
-    task: TTask;
-    updateTask: (updatedItem: TTask) => void;
-    isFocusOnNew: boolean;
-  };
-
-const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew }) => {
+const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew, changeTaskPosition }) => {
 
     const [isEdit, setIsEdit] = useState(isFocusOnNew);
 
@@ -54,6 +47,16 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew }) => {
     const handleCloseDetails = () => {
         setIsDetailsOpen(false);
     };
+
+    const handleClickUp = () => {
+        handleMenuClose();
+        changeTaskPosition(task.id, -1);
+      };
+
+      const handleClickDown = () => {
+        handleMenuClose();
+        changeTaskPosition(task.id, 1);
+      };
 
     return(
         <>
@@ -100,13 +103,13 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew }) => {
                     'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={handleMenuClose}>
+                    <MenuItem onClick={handleClickUp}>
                         <ListItemIcon>
                             <NorthIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText>Move Up</ListItemText>
                     </MenuItem>
-                    <MenuItem onClick={handleMenuClose}>
+                    <MenuItem onClick={handleClickDown}>
                         <ListItemIcon>
                             <SouthIcon fontSize="small" />
                         </ListItemIcon>
