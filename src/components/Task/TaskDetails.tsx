@@ -1,14 +1,14 @@
 import React from 'react';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import { TListDetailsProps } from '../../types/CommonTypes';
+import { TTaskDetailsProps } from '../../types/CommonTypes';
 
-const ListDetails: React.FC<TListDetailsProps> = ({ isOpen, handleClose, list }) => {
+const TaskDetails: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, task }) => {
   
     return (
         <Dialog open={isOpen} onClose={handleClose} >
-          <DialogTitle sx={{  color:'white', backgroundColor:'black' }}><b>Name: </b>{list.name}</DialogTitle>
+          <DialogTitle sx={{  color:'white', backgroundColor:'black' }}><b>Name: </b>{task.name}</DialogTitle>
           <DialogContent sx={{  color:'white', backgroundColor:'black' }}>
-            <p><b>Description: </b>{list.description}</p>
+            <p><b>Description: </b>{task.description}</p>
           </DialogContent>
           <DialogActions sx={{  color:'white', backgroundColor:'black' }}>
             <Button onClick={handleClose} color="primary">Close</Button>
@@ -17,4 +17,4 @@ const ListDetails: React.FC<TListDetailsProps> = ({ isOpen, handleClose, list })
     );
   }
   
-  export default ListDetails;
+  export default TaskDetails;

@@ -2,7 +2,7 @@ import { Grid, OutlinedInput, Box } from "@mui/material"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { TListHeaderProps } from "../../types/CommonTypes";
 import { useState } from "react";
-import ListDetail from "./ListDetails";
+import ListDetails from "./ListDetails";
 
 const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
     const openListDetails = () => {
@@ -65,7 +65,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
                             <MoreHorizIcon sx={{ cursor: 'pointer', color:'white'}} fontSize="small" onClick={() => openListDetails()} cursor='pointer'></MoreHorizIcon>
                         </Grid>
                     </Grid>
-                    <ListDetail isOpen={isDetailsOpen} handleClose={handleCloseDetails} list={list} />
+                    <ListDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} list={list} />
                 </>
             }
         </>

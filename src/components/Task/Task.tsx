@@ -6,6 +6,7 @@ import React from "react";
 import NorthIcon from '@mui/icons-material/North';
 import SouthIcon from '@mui/icons-material/South';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import TaskDetails from "./TaskDetails";
 
 type TTaskProps = {
     key: React.Key;
@@ -33,11 +34,6 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew }) => {
         }
      }
 
-    const openTaskDetails = () => {
-        handleMenuClose();
-        alert("Task details \n\n Name: " + task.name + "\n\n Description: " + task.description);
-    }
-
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -46,6 +42,17 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew }) => {
 
     const handleMenuClose = () => {
       setAnchorEl(null);
+    };
+
+    const openTaskDetails = () => {
+        handleMenuClose();
+        setIsDetailsOpen(true);
+    }
+
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+    const handleCloseDetails = () => {
+        setIsDetailsOpen(false);
     };
 
     return(
@@ -112,6 +119,7 @@ const Task: React.FC<TTaskProps> = ({ task, updateTask, isFocusOnNew }) => {
                         <ListItemText>Details</ListItemText>
                     </MenuItem>
                 </Menu>
+                <TaskDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} task={task} />
             </>
             }
         </>

@@ -45,3 +45,9 @@ export type TListMoveNavigationProps = {
   listId: number, 
   changePosition: (listId: number, offset: number) => void;
 };
+
+export type TTaskDetailsProps = {
+  task: TTask;
+  handleClose: () => void;
+  isOpen: boolean;
+};
