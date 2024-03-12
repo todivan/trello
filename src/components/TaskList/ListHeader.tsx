@@ -2,11 +2,18 @@ import { Grid, OutlinedInput, Box } from "@mui/material"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { TListHeaderProps } from "../../types/CommonTypes";
 import { useState } from "react";
+import ListDetail from "./ListDetails";
 
 const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
     const openListDetails = () => {
-        alert("List details \n\n Name: " + list.name + "\n\n Description: " + list.description);
+        setIsDetailsOpen(true);
     }
+
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+    const handleCloseDetails = () => {
+        setIsDetailsOpen(false);
+    };
 
     const [isEdit, setIsEdit] = useState(false);
 
@@ -47,17 +54,19 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
                 />
 
                 :
-
-                <Grid container spacing={2} sx={{ border: '0px', width:250, padding:2, paddingRight:0, paddingBottom:0, cursor: 'pointer'}} >
-                    <Grid xs={10}>
-                        <div onClick={switchToEdit}>
-                            <Box display="flex" color={"white"}><b>{list.name}</b></Box>
-                        </div>
+                <>
+                    <Grid container spacing={2} sx={{ border: '0px', width:250, padding:2, paddingRight:0, paddingBottom:0, cursor: 'pointer'}} >
+                        <Grid xs={10}>
+                            <div onClick={switchToEdit}>
+                                <Box display="flex" color={"white"}><b>{list.name}</b></Box>
+                            </div>
+                        </Grid>
+                        <Grid xs={2}>
+                            <MoreHorizIcon sx={{ cursor: 'pointer', color:'white'}} fontSize="small" onClick={() => openListDetails()} cursor='pointer'></MoreHorizIcon>
+                        </Grid>
                     </Grid>
-                    <Grid xs={2}>
-                        <MoreHorizIcon sx={{ cursor: 'pointer', color:'white'}} fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>
-                    </Grid>
-                </Grid>
+                    <ListDetail isOpen={isDetailsOpen} handleClose={handleCloseDetails} list={list} />
+                </>
             }
         </>
     );

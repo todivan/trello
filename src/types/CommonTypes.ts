@@ -35,6 +35,12 @@ export type TListHeaderProps = {
   updateList: (updatedItem: TList) => void;
 };
 
+export type TListDetailsProps = {
+  list: TList;
+  handleClose: () => void;
+  isOpen: boolean;
+};
+
 export type TListMoveNavigationProps = {
   listId: number, 
   changePosition: (listId: number, offset: number) => void;
