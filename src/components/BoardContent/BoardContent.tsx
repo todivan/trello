@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TasksList from "../TaskList/TasksList";
 import { useLists } from "../../context/ListsContext";
 import { TaskProvider } from '../../context/TaskContext';
@@ -8,7 +8,8 @@ import { TList } from '../../types/CommonTypes';
 
 const BoardContent = () => {
     const {collectionOfLists, setCollectionOfLists} = useLists();
-
+    const [newAddedId, setNewAddedId] = useState<number>(-1);
+    
     const addNewList = () => {
         const newObject = {
             id: collectionOfLists.length + 1,
@@ -17,11 +18,12 @@ const BoardContent = () => {
             description: `Description ${collectionOfLists.length + 1}`,
         };
         setCollectionOfLists((prevList) => [...prevList, newObject]);
-        };
+        setNewAddedId(newObject.id);
+    };
 
     const updateList = (updatedItem: TList) => {
         setCollectionOfLists(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
-        };
+    };
 
     const changePosition = (listId: number, offset: number) => {
         const index = collectionOfLists.findIndex((item) => item.id === listId);
@@ -62,7 +64,7 @@ const BoardContent = () => {
         >
             <TaskProvider>
                 {sortedLists.map((item) => (
-                    <TasksList key={item.id} list={item} updateList={updateList} changePosition={changePosition}/>
+                    <TasksList key={item.id} list={item} updateList={updateList} isFocusOnNewList={newAddedId === item.id} changePosition={changePosition} />
                 ))} 
                 <Button sx={{ color:'white' }} variant="outlined" startIcon={<AddIcon />} onClick={addNewList}>
                     Add another list

@@ -4,7 +4,7 @@ import { TListHeaderProps } from "../../types/CommonTypes";
 import { useState } from "react";
 import ListDetails from "./ListDetails";
 
-const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
+const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, updateList })=> {
     const openListDetails = () => {
         setIsDetailsOpen(true);
     }
@@ -15,7 +15,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, updateList })=> {
         setIsDetailsOpen(false);
     };
 
-    const [isEdit, setIsEdit] = useState(false);
+    const [isEdit, setIsEdit] = useState(isFocusOnNewList);
 
     const switchToEdit = () => {
         setIsEdit(true);

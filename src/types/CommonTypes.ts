@@ -35,12 +35,14 @@ export type TTaskProps = {
 export type TListProps = {
   key: React.Key;
   list: TList;
+  isFocusOnNewList: boolean;
   updateList: (updatedItem: TList) => void;
   changePosition: (listId: number, offset: number) => void;
 };
 
 export type TListHeaderProps = {
   list: TList;
+  isFocusOnNewList: boolean;
   updateList: (updatedItem: TList) => void;
 };
 

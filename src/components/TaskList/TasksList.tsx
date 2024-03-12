@@ -7,7 +7,7 @@ import ListHeader from "./ListHeader";
 import ListMoveNavigation from "./ListMoveNavigation";
 import { useState } from "react";
 
-const TasksList: React.FC<TListProps> = ({ key, list, updateList, changePosition }) => {
+const TasksList: React.FC<TListProps> = ({ list, updateList, isFocusOnNewList,  changePosition }) => {
 
     const {collectionOfTasks, setCollectionOfTasks} = useTasks();
     const [newAddedId, setNewAddedId] = useState<number>(-1);
@@ -62,7 +62,7 @@ const TasksList: React.FC<TListProps> = ({ key, list, updateList, changePosition
             <Box borderRadius={3} sx={{ bgcolor:'#323a48', padding: '10px' }}>
                 <Stack spacing={1}>
                     <Box>
-                        <ListHeader list={list} updateList={updateList}/>
+                        <ListHeader list={list} updateList={updateList} isFocusOnNewList={isFocusOnNewList}/>
                         <ListMoveNavigation listId={list.id} changePosition={changePosition}/>
                     </Box>
                     
