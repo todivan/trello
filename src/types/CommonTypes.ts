@@ -26,7 +26,8 @@ export type TTaskProps = {
   key: React.Key;
   task: TTask;
   isFocusOnNew: boolean;
-  changeTaskPosition: (listId: number, offset: number) => void;
+  collectionOfTasks: TTask[]; 
+  setCollectionOfTasks: React.Dispatch<React.SetStateAction<TTask[]>>;
 };
 
 export type TListProps = {

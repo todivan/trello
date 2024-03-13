@@ -7,9 +7,9 @@ import NorthIcon from '@mui/icons-material/North';
 import SouthIcon from '@mui/icons-material/South';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import TaskDetails from "./TaskDetails";
-import { useTasks } from "../../context/TaskContext";
+import { changePosition } from "../../Utils/ChangePosition";
 
-const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, changeTaskPosition }) => {
+const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, setCollectionOfTasks }) => {
 
     const [isEdit, setIsEdit] = useState(isFocusOnNew);
 
@@ -18,7 +18,6 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, changeTaskPosition }) 
         event.stopPropagation();
     };
 
-    const { setCollectionOfTasks } = useTasks();
     const updateTask = (updatedItem: TTask) => {
         setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
       };
@@ -58,12 +57,12 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, changeTaskPosition }) 
 
     const handleClickUp = () => {
         handleMenuClose();
-        changeTaskPosition(task.id, -1);
+        changePosition(task.id, -1, collectionOfTasks, setCollectionOfTasks);
       };
 
       const handleClickDown = () => {
         handleMenuClose();
-        changeTaskPosition(task.id, 1);
+        changePosition(task.id, 1, collectionOfTasks, setCollectionOfTasks);
       };
 
     return(

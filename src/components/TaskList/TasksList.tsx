@@ -24,32 +24,6 @@ const TasksList: React.FC<TListProps> = ({ list, isFocusOnNewList }) => {
         setNewAddedId(newObject.id);
       };
 
-    const changeTaskPosition = (listId: number, offset: number) => {
-        const index = collectionOfTasks.findIndex((item) => item.id === listId);
-
-        if (index === -1) {
-            return;
-        }
-
-        const updatedList = [...collectionOfTasks];
-        const itemToMove = updatedList[index];
-        const newPosition = itemToMove.position + offset;
-
-        if (newPosition < 1 || newPosition > updatedList.length) {
-            return;
-        }
-
-        updatedList.splice(index, 1);
-
-        updatedList.splice(newPosition - 1, 0, itemToMove);
-
-        updatedList.forEach((item, i) => {
-            item.position = i + 1;
-        });
-
-        setCollectionOfTasks(updatedList);
-    };
-
     const sortedTsks = [...collectionOfTasks]
     .sort((a, b) => a.position > b.position ? 1 : -1)
 
@@ -63,7 +37,7 @@ const TasksList: React.FC<TListProps> = ({ list, isFocusOnNewList }) => {
                     </Box>
                     
                     {sortedTsks.filter(x => x.listId === list.id).map((item) => (
-                        <Task key={item.id} task={item} isFocusOnNew={newAddedId === item.id} changeTaskPosition={changeTaskPosition} />
+                        <Task key={item.id} task={item} isFocusOnNew={newAddedId === item.id} collectionOfTasks={collectionOfTasks} setCollectionOfTasks={setCollectionOfTasks} />
                     ))} 
 
                     <Button variant="outlined" sx={{ color:'white' }} startIcon={<AddIcon />} onClick={addNewTask}>
