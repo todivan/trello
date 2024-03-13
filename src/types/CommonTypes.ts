@@ -12,12 +12,10 @@ export type TListContextType = {
 };
 
 export type TTask = {
-  id: number;
   name: string;
   listId: number;
-  position: number;
   description: string;
-};
+} & SortableObject;
 
 export type TTaskContextType = {
   collectionOfTasks: TTask[];
@@ -57,3 +55,8 @@ export type TTaskDetailsProps = {
   handleClose: () => void;
   isOpen: boolean;
 };
+
+export interface SortableObject {
+  id: number;
+  position: number;
+}

@@ -1,7 +1,5 @@
-/* eslint-disable no-mixed-operators */
 import React, { createContext, useContext, useState } from 'react';
 import { TListContextType, TList } from '../types/CommonTypes';
-
 
 const ListsContext = createContext<TListContextType | null>(null);
 
@@ -21,7 +19,7 @@ export const ListProvider: React.FC<{children: React.ReactNode}> = ({ children }
 export const useLists = (): TListContextType => {
   const context = useContext(ListsContext);
   if (!context) {
-    throw new Error('useTasks must be used within a TaskProvider');
+    throw new Error('useLists must be used within a ListProvider');
   }
   return context;
 };
