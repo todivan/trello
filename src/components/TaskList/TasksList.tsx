@@ -1,16 +1,22 @@
 import Task from "../Task/Task";
 import { TaskProvider, useTasks } from "../../context/TaskContext";
-import { TListProps } from "../../types/CommonTypes";
 import { Box, Button, Stack } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import ListHeader from "./ListHeader";
 import ListMoveNavigation from "./ListMoveNavigation";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { TList } from "../../types/CommonTypes";
+
+export type TListProps = {
+    key: React.Key;
+    list: TList;
+    isFocusOnNewList: boolean;
+  };
 
 const TasksList: React.FC<TListProps> = ({ list, isFocusOnNewList }) => {
 
     const {collectionOfTasks, setCollectionOfTasks} = useTasks();
-    const [newAddedId, setNewAddedId] = useState<number>(-1);
+    const [newAddedId, setNewAddedId] = useState(-1);
 
     const addNewTask = () => {
         const newObject = {
@@ -24,8 +30,9 @@ const TasksList: React.FC<TListProps> = ({ list, isFocusOnNewList }) => {
         setNewAddedId(newObject.id);
       };
 
-    const sortedTsks = [...collectionOfTasks]
-    .sort((a, b) => a.position > b.position ? 1 : -1)
+      const sortedTsks = useMemo(() => {
+        return [...collectionOfTasks].sort((a, b) => a.position > b.position ? 1 : -1)
+      },[collectionOfTasks]);
 
     return(
         <TaskProvider>

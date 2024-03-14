@@ -1,31 +1,51 @@
-import { SortableObject } from "../types/CommonTypes";
+
+export interface SortableObject {
+    id: number;
+    position: number;
+  }
 
 export function changePosition<T extends SortableObject>(
     listId: number, 
     offset: number, 
     collectionOfObjects: T[], 
-    setCollectionOfObjects: React.Dispatch<React.SetStateAction<T[]>>) :void {
+    updateCollection: (updatedList: T[]) => void
+    ) : void {
     const index = collectionOfObjects.findIndex((item) => item.id === listId);
 
     if (index === -1) {
         return;
     }
 
-    const updatedList = [...collectionOfObjects];
-    const itemToMove = updatedList[index];
-    const newPosition = itemToMove.position + offset;
+    const newPosition = index + offset;
 
-    if (newPosition < 1 || newPosition > updatedList.length) {
+    if (newPosition < 0 || newPosition > collectionOfObjects.length - 1) {
         return;
     }
 
-    updatedList.splice(index, 1);
+    // const updatedList = index < newPosition 
+    // ? [...collectionOfObjects.slice(0, index), ...collectionOfObjects.slice(index + 1, newPosition + 1), collectionOfObjects[index], ...collectionOfObjects.slice(newPosition + 1)] 
+    // : [...collectionOfObjects.slice(0, newPosition), collectionOfObjects[index], ...collectionOfObjects.slice(newPosition, index), ...collectionOfObjects.slice(index + 1)]
 
-    updatedList.splice(newPosition - 1, 0, itemToMove);
+    const updatedList = collectionOfObjects.reduce((acc: T[], currentItem: T, currentIndex: number) => {
+        if (currentIndex === index) {
+            return acc;
+        }
 
+        if (currentIndex === newPosition) {
+            if(index < newPosition) {
+                return [...acc, currentItem, collectionOfObjects[index]];
+            } else {
+                return [...acc, collectionOfObjects[index], currentItem];
+            }
+        }
+
+        return [...acc, currentItem];
+    }, []);
+
+    
     updatedList.forEach((item, i) => {
         item.position = i + 1;
     });
 
-    setCollectionOfObjects(updatedList);
+    updateCollection(updatedList);
 };

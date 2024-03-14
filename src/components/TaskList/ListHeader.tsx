@@ -1,9 +1,14 @@
 import { Grid, OutlinedInput, Box } from "@mui/material"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { TList, TListHeaderProps } from "../../types/CommonTypes";
+import { TList } from "../../types/CommonTypes";
 import { useState } from "react";
-import ListDetails from "./ListDetails";
+import ItemDetails from "../ItemDetails";
 import { useLists } from "../../context/ListsContext";
+
+export type TListHeaderProps = {
+    list: TList;
+    isFocusOnNewList: boolean;
+  };
 
 const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList })=> {
     const openListDetails = () => {
@@ -69,10 +74,10 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList })=> {
                             </div>
                         </Grid>
                         <Grid xs={2}>
-                            <MoreHorizIcon sx={{ cursor: 'pointer', color:'white'}} fontSize="small" onClick={() => openListDetails()} cursor='pointer'></MoreHorizIcon>
+                            <MoreHorizIcon sx={{ cursor: 'pointer', color:'white'}} fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>
                         </Grid>
                     </Grid>
-                    <ListDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} list={list} />
+                    <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={list.name} description={list.description} />
                 </>
             }
         </>

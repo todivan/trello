@@ -1,3 +1,4 @@
+import { SortableObject } from "../Utils/ChangePosition";
 
 export type TList = {
   id: number;
@@ -22,42 +23,13 @@ export type TTaskContextType = {
   setCollectionOfTasks: React.Dispatch<React.SetStateAction<TTask[]>>;
 };
 
-export type TTaskProps = {
-  key: React.Key;
-  task: TTask;
-  isFocusOnNew: boolean;
-  collectionOfTasks: TTask[]; 
-  setCollectionOfTasks: React.Dispatch<React.SetStateAction<TTask[]>>;
-};
 
-export type TListProps = {
-  key: React.Key;
-  list: TList;
-  isFocusOnNewList: boolean;
-};
 
-export type TListHeaderProps = {
-  list: TList;
-  isFocusOnNewList: boolean;
-};
 
-export type TListDetailsProps = {
-  list: TList;
-  handleClose: () => void;
-  isOpen: boolean;
-};
 
-export type TListMoveNavigationProps = {
-  listId: number;
-};
 
-export type TTaskDetailsProps = {
-  task: TTask;
-  handleClose: () => void;
-  isOpen: boolean;
-};
 
-export interface SortableObject {
-  id: number;
-  position: number;
-}
+
+
+
+

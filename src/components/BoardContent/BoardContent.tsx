@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import TasksList from "../TaskList/TasksList";
 import { useLists } from "../../context/ListsContext";
 import { TaskProvider } from '../../context/TaskContext';
@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const BoardContent = () => {
     const {collectionOfLists, setCollectionOfLists} = useLists();
-    const [newAddedId, setNewAddedId] = useState<number>(-1);
+    const [newAddedId, setNewAddedId] = useState(-1);
     
     const addNewList = () => {
         const newObject = {
@@ -20,8 +20,9 @@ const BoardContent = () => {
         setNewAddedId(newObject.id);
     };
 
-    const sortedLists = [...collectionOfLists]
-        .sort((a, b) => a.position > b.position ? 1 : -1)
+const sortedLists = useMemo(() => {
+        return [...collectionOfLists].sort((a, b) => a.position > b.position ? 1 : -1);
+    }, [collectionOfLists]);
 
     return(
         <Stack

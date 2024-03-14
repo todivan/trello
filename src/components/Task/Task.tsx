@@ -1,13 +1,21 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, TextField } from "@mui/material";
-import { TTask, TTaskProps } from "../../types/CommonTypes";
+import { TTask } from "../../types/CommonTypes";
 import ModeIcon from '@mui/icons-material/Mode';
 import React from "react";
 import NorthIcon from '@mui/icons-material/North';
 import SouthIcon from '@mui/icons-material/South';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import TaskDetails from "./TaskDetails";
+import ItemDetails from "../ItemDetails";
 import { changePosition } from "../../Utils/ChangePosition";
+
+export type TTaskProps = {
+    key: React.Key;
+    task: TTask;
+    isFocusOnNew: boolean;
+    collectionOfTasks: TTask[]; 
+    setCollectionOfTasks: React.Dispatch<React.SetStateAction<TTask[]>>;
+  };
 
 const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, setCollectionOfTasks }) => {
 
@@ -51,18 +59,22 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
 
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
+    const updateCollection = useCallback((updatedList: TTask[]) => {
+        setCollectionOfTasks(updatedList);
+    }, [setCollectionOfTasks]);
+
     const handleCloseDetails = () => {
         setIsDetailsOpen(false);
     };
 
     const handleClickUp = () => {
         handleMenuClose();
-        changePosition(task.id, -1, collectionOfTasks, setCollectionOfTasks);
+        changePosition(task.id, -1, collectionOfTasks, updateCollection);
       };
 
       const handleClickDown = () => {
         handleMenuClose();
-        changePosition(task.id, 1, collectionOfTasks, setCollectionOfTasks);
+        changePosition(task.id, 1, collectionOfTasks, updateCollection);
       };
 
     return(
@@ -129,7 +141,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                         <ListItemText>Details</ListItemText>
                     </MenuItem>
                 </Menu>
-                <TaskDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} task={task} />
+                <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={task.name} description={task.description} />
             </>
             }
         </>

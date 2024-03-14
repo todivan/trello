@@ -1,26 +1,31 @@
 import { East, West } from "@mui/icons-material";
 import { Box } from "@mui/material";
-import { TListMoveNavigationProps } from "../../types/CommonTypes";
+import { TList } from "../../types/CommonTypes";
 import { useLists } from "../../context/ListsContext";
 import { changePosition } from "../../Utils/ChangePosition";
+import { useCallback } from "react";
+
+export type TListMoveNavigationProps = {
+    listId: number;
+  };
 
 const ListMoveNavigation: React.FC<TListMoveNavigationProps> = ({ listId } ) => {
-    const handleClickRight = (event: React.MouseEvent<HTMLDivElement>) => {
-        changePosition(listId, 1, collectionOfLists, setCollectionOfLists);
-      };
+    const {collectionOfLists, setCollectionOfLists} = useLists();
 
-      const handleClickLeft = (event: React.MouseEvent<HTMLDivElement>) => {
-        changePosition(listId, -1, collectionOfLists, setCollectionOfLists);
-      };
+    const updateCollection = useCallback((updatedList: TList[]) => {
+        setCollectionOfLists(updatedList);
+    }, [setCollectionOfLists]);
 
-      const {collectionOfLists, setCollectionOfLists} = useLists();
+    const handleClickMove = (offset: number) => {
+        changePosition(listId, offset, collectionOfLists, updateCollection);
+      };
     
     return(
         <Box display="flex" justifyContent="space-between" padding={0} margin-top={0} color={'white'}>
-            <Box textAlign="left" onClick={handleClickLeft}>
+            <Box textAlign="left" onClick={() => handleClickMove(-1)}>
                 <West fontSize="small" cursor='pointer'></West>
             </Box>
-            <Box textAlign="right" onClick={handleClickRight}>
+            <Box textAlign="right" onClick={() => handleClickMove(1)}>
                 <East fontSize="small" cursor='pointer'></East>
             </Box>
         </Box>
