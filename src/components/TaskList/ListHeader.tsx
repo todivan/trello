@@ -1,14 +1,27 @@
 import { Grid, OutlinedInput, Box } from "@mui/material"
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { TListProps } from "../../types/CommonTypes";
+import { TList } from "../../types/CommonTypes";
 import { useState } from "react";
+import ItemDetails from "../ItemDetails";
+import { useLists } from "../../context/ListsContext";
 
-const ListHeader: React.FC<TListProps> = ({ key, list, updateList })=> {
+export type TListHeaderProps = {
+    list: TList;
+    isFocusOnNewList: boolean;
+  };
+
+const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList })=> {
     const openListDetails = () => {
-        alert("List details \n\n Name: " + list.name + "\n\n Description: " + list.description);
+        setIsDetailsOpen(true);
     }
 
-    const [isEdit, setIsEdit] = useState(false);
+    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
+    const handleCloseDetails = () => {
+        setIsDetailsOpen(false);
+    };
+
+    const [isEdit, setIsEdit] = useState(isFocusOnNewList);
 
     const switchToEdit = () => {
         setIsEdit(true);
@@ -25,8 +38,14 @@ const ListHeader: React.FC<TListProps> = ({ key, list, updateList })=> {
         }
      }
 
+     const {setCollectionOfLists} = useLists();
+
+     const updateList = (updatedItem: TList) => {
+        setCollectionOfLists(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
+    };
+
     return (
-        <Box>
+        <>
             {isEdit ? 
                 <OutlinedInput
                     id="outlined-adornment-weight"
@@ -34,10 +53,10 @@ const ListHeader: React.FC<TListProps> = ({ key, list, updateList })=> {
                     minRows={1}
                     maxRows={8}
                     defaultValue={list.name}
-                    endAdornment={<MoreHorizIcon fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>}
                     aria-describedby="outlined-weight-helper-text"
                     onKeyDown={keyPress}
                     autoFocus={true}
+                    sx={{ cursor: 'pointer', color:'white', padding:'10px 0px 10px 0px' }}
                     onFocus={event => {
                         event.target.select();
                     }}
@@ -47,20 +66,21 @@ const ListHeader: React.FC<TListProps> = ({ key, list, updateList })=> {
                 />
 
                 :
-
-                <Grid container spacing={2} sx={{ border: '0px', width:250, padding:2, cursor: 'pointer'}} >
-                    <Grid xs={10}>
-                        <div onClick={switchToEdit}>
-                            <Box display="flex"><b>{list.name}</b></Box>
-                        </div>
+                <>
+                    <Grid container spacing={2} sx={{ border: '0px', width:250, padding:2, paddingRight:0, paddingBottom:0, cursor: 'pointer'}} >
+                        <Grid xs={10}>
+                            <div onClick={switchToEdit}>
+                                <Box display="flex" color={"white"}><b>{list.name}</b></Box>
+                            </div>
+                        </Grid>
+                        <Grid xs={2}>
+                            <MoreHorizIcon sx={{ cursor: 'pointer', color:'white'}} fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>
+                        </Grid>
                     </Grid>
-                    <Grid xs={2}>
-                        <MoreHorizIcon fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>
-                    </Grid>
-                </Grid>
-                
+                    <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={list.name} description={list.description} />
+                </>
             }
-        </Box>
+        </>
     );
 }
 

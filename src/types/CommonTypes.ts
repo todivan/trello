@@ -1,7 +1,9 @@
+import { SortableObject } from "../Utils/ChangePosition";
 
 export type TList = {
   id: number;
   name: string;
+  position: number;
   description: string;
 };
 
@@ -11,19 +13,23 @@ export type TListContextType = {
 };
 
 export type TTask = {
-  id: number;
   name: string;
   listId: number;
   description: string;
-};
+} & SortableObject;
 
 export type TTaskContextType = {
   collectionOfTasks: TTask[];
   setCollectionOfTasks: React.Dispatch<React.SetStateAction<TTask[]>>;
 };
 
-export type TListProps = {
-  key: React.Key;
-  list: TList;
-  updateList: (updatedItem: TList) => void;
-};
+
+
+
+
+
+
+
+
+
+

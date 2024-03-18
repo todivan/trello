@@ -9,6 +9,7 @@ const LeftMenu = () => {
         my={4}
         display="flex"
         alignItems="top"
+        color={"white"}
         gap={4}
         p={2}
         sx={{ border: '2px solid grey', bgcolor: 'primary.main', margin:'5px'}}>Trello Workspace</Box>
