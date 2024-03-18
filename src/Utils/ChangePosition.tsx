@@ -1,51 +1,49 @@
-
 export interface SortableObject {
-    id: number;
-    position: number;
+  id: number
+  position: number
+}
+
+export function changePosition<T extends SortableObject> (
+  listId: number,
+  offset: number,
+  collectionOfObjects: T[],
+  updateCollection: (updatedList: T[]) => void
+): void {
+  const index = collectionOfObjects.findIndex((item) => item.id === listId)
+
+  if (index === -1) {
+    return
   }
 
-export function changePosition<T extends SortableObject>(
-    listId: number, 
-    offset: number, 
-    collectionOfObjects: T[], 
-    updateCollection: (updatedList: T[]) => void
-    ) : void {
-    const index = collectionOfObjects.findIndex((item) => item.id === listId);
+  const newPosition = index + offset
 
-    if (index === -1) {
-        return;
+  if (newPosition < 0 || newPosition > collectionOfObjects.length - 1) {
+    return
+  }
+
+  // const updatedList = index < newPosition
+  // ? [...collectionOfObjects.slice(0, index), ...collectionOfObjects.slice(index + 1, newPosition + 1), collectionOfObjects[index], ...collectionOfObjects.slice(newPosition + 1)]
+  // : [...collectionOfObjects.slice(0, newPosition), collectionOfObjects[index], ...collectionOfObjects.slice(newPosition, index), ...collectionOfObjects.slice(index + 1)]
+
+  const updatedList = collectionOfObjects.reduce((acc: T[], currentItem: T, currentIndex: number) => {
+    if (currentIndex === index) {
+      return acc
     }
 
-    const newPosition = index + offset;
-
-    if (newPosition < 0 || newPosition > collectionOfObjects.length - 1) {
-        return;
+    if (currentIndex === newPosition) {
+      if (index < newPosition) {
+        return [...acc, currentItem, collectionOfObjects[index]]
+      } else {
+        return [...acc, collectionOfObjects[index], currentItem]
+      }
     }
 
-    // const updatedList = index < newPosition 
-    // ? [...collectionOfObjects.slice(0, index), ...collectionOfObjects.slice(index + 1, newPosition + 1), collectionOfObjects[index], ...collectionOfObjects.slice(newPosition + 1)] 
-    // : [...collectionOfObjects.slice(0, newPosition), collectionOfObjects[index], ...collectionOfObjects.slice(newPosition, index), ...collectionOfObjects.slice(index + 1)]
+    return [...acc, currentItem]
+  }, [])
 
-    const updatedList = collectionOfObjects.reduce((acc: T[], currentItem: T, currentIndex: number) => {
-        if (currentIndex === index) {
-            return acc;
-        }
+  updatedList.forEach((item, i) => {
+    item.position = i + 1
+  })
 
-        if (currentIndex === newPosition) {
-            if(index < newPosition) {
-                return [...acc, currentItem, collectionOfObjects[index]];
-            } else {
-                return [...acc, collectionOfObjects[index], currentItem];
-            }
-        }
-
-        return [...acc, currentItem];
-    }, []);
-
-    
-    updatedList.forEach((item, i) => {
-        item.position = i + 1;
-    });
-
-    updateCollection(updatedList);
+  updateCollection(updatedList)
 };
