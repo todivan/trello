@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, TextField } from '@mui/material'
 import { type TTask } from '../../types/CommonTypes'
 import ModeIcon from '@mui/icons-material/Mode'
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import NorthIcon from '@mui/icons-material/North'
 import SouthIcon from '@mui/icons-material/South'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
@@ -19,6 +19,7 @@ export interface TTaskProps {
 
 const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, setCollectionOfTasks }) => {
   const [isEdit, setIsEdit] = useState(isFocusOnNew)
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false)
 
   const switchToEdit = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     setIsEdit(true)
@@ -55,8 +56,6 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
     setIsDetailsOpen(true)
   }
 
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false)
-
   const updateCollection = useCallback((updatedList: TTask[]) => {
     setCollectionOfTasks(updatedList)
   }, [setCollectionOfTasks])
@@ -73,6 +72,11 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
   const handleClickDown = () => {
     handleMenuClose()
     changePosition(task.id, 1, collectionOfTasks, updateCollection)
+  }
+
+  const handleClickDelete = () => {
+    handleMenuClose()
+    setCollectionOfTasks(prevTask => prevTask.filter(t => t.id !== task.id))
   }
 
   return (
@@ -136,6 +140,12 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                             <MoreHorizIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText>Details</ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={handleClickDelete}>
+                        <ListItemIcon>
+                            <DeleteForeverIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText>Delete</ListItemText>
                     </MenuItem>
                 </Menu>
                 <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={task.name} description={task.description} />
