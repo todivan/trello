@@ -1,27 +1,34 @@
-import { Grid, OutlinedInput, Box } from '@mui/material'
+import { Grid, OutlinedInput, Box, Dialog, DialogTitle, Button, DialogActions } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
-import { type TList } from '../../types/CommonTypes'
-import { useState } from 'react'
+import { type TTask, type TList } from '../../types/CommonTypes'
+import { useMemo, useState } from 'react'
 import ItemDetails from '../ItemDetails'
 import { useLists } from '../../context/ListsContext'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 
 export interface TListHeaderProps {
   list: TList
   isFocusOnNewList: boolean
+  collectionOfTasks: TTask[]
 }
 
-const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList }: TListHeaderProps) => {
+const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collectionOfTasks }: TListHeaderProps) => {
+  const [isEdit, setIsEdit] = useState(isFocusOnNewList)
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false)
+  const { setCollectionOfLists } = useLists()
+  const [openDialog, setOpenDialog] = useState(false)
+
+  const taskOfCurrentList = useMemo(() => {
+    return [...collectionOfTasks].filter(x => x.listId === list.id)
+  }, [collectionOfTasks])
+
   const openListDetails = () => {
     setIsDetailsOpen(true)
   }
 
-  const [isDetailsOpen, setIsDetailsOpen] = useState(false)
-
   const handleCloseDetails = () => {
     setIsDetailsOpen(false)
   }
-
-  const [isEdit, setIsEdit] = useState(isFocusOnNewList)
 
   const switchToEdit = () => {
     setIsEdit(true)
@@ -38,10 +45,24 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList }: TLis
     }
   }
 
-  const { setCollectionOfLists } = useLists()
-
   const updateList = (updatedItem: TList) => {
     setCollectionOfLists(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)))
+  }
+
+  const openDeleteDialog = () => {
+    if (taskOfCurrentList.length > 0) {
+      alert('This list can not be deleted, because contins tasks!!!')
+    } else {
+      setOpenDialog(true)
+    }
+  }
+
+  const handleDeleteList = () => {
+    setCollectionOfLists(prevList => prevList.filter(l => l.id !== list.id))
+  }
+
+  const handleDialogClose = () => {
+    setOpenDialog(false)
   }
 
   return (
@@ -72,13 +93,31 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList }: TLis
                                 <Box display="flex" color={'white'}><b>{list.name}</b></Box>
                             </div>
                         </Grid>
-                        <Grid xs={2}>
+                        <Grid xs={1}>
                             <MoreHorizIcon sx={{ cursor: 'pointer', color: 'white' }} fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>
+                        </Grid>
+                        <Grid xs={1}>
+                            <DeleteForeverIcon sx={{ cursor: 'pointer', color: 'white' }} fontSize="small" onClick={openDeleteDialog} cursor='pointer'></DeleteForeverIcon>
                         </Grid>
                     </Grid>
                     <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={list.name} description={list.description} />
                 </>
             }
+            <Dialog
+              fullWidth
+              maxWidth={'sm'}
+              open={openDialog} // Use value directly here
+              onClose={handleDialogClose}>
+              <DialogTitle>Are you sure that you want to delete list?</DialogTitle>
+              <DialogActions>
+                <Button variant="outlined" onClick={handleDeleteList}>
+                  Yes
+                </Button>
+                <Button variant="outlined" onClick={handleDialogClose}>
+                  Cancel
+                </Button>
+              </DialogActions>
+            </Dialog>
         </>
   )
 }

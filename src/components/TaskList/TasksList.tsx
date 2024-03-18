@@ -29,7 +29,7 @@ const TasksList: React.FC<TListProps> = ({ list, isFocusOnNewList }: TListProps)
     setNewAddedId(newObject.id)
   }
 
-  const sortedTsks = useMemo(() => {
+  const sortedTasks = useMemo(() => {
     return [...collectionOfTasks].sort((a, b) => a.position > b.position ? 1 : -1)
   }, [collectionOfTasks])
 
@@ -38,11 +38,11 @@ const TasksList: React.FC<TListProps> = ({ list, isFocusOnNewList }: TListProps)
             <Box borderRadius={3} sx={{ bgcolor: '#323a48', padding: '10px' }}>
                 <Stack spacing={1}>
                     <Box>
-                        <ListHeader list={list} isFocusOnNewList={isFocusOnNewList}/>
+                        <ListHeader list={list} isFocusOnNewList={isFocusOnNewList} collectionOfTasks={collectionOfTasks}/>
                         <ListMoveNavigation listId={list.id} />
                     </Box>
 
-                    {sortedTsks.filter(x => x.listId === list.id).map((item) => (
+                    {sortedTasks.filter(x => x.listId === list.id).map((item) => (
                         <Task key={item.id} task={item} isFocusOnNew={newAddedId === item.id} collectionOfTasks={collectionOfTasks} setCollectionOfTasks={setCollectionOfTasks} />
                     ))}
 
