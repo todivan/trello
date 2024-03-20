@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react'
 import Task, { type TTaskProps } from '../../../components/Task/Task'
 import type { TTask } from '../../../types/CommonTypes'
+import React from 'react'
 
 const taskValue: TTask = { id: 1, name: 'testTask', description: 'taskDescription', listId: 2, position: 3 }
 const taskCollectionValue: TTask[] = []

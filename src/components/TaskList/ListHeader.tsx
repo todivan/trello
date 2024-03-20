@@ -1,7 +1,7 @@
 import { Grid, OutlinedInput, Box, Dialog, DialogTitle, Button, DialogActions } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { type TTask, type TList } from '../../types/CommonTypes'
-import { useMemo, useState } from 'react'
+import { Fragment, useMemo, useState } from 'react'
 import ItemDetails from '../ItemDetails'
 import { useLists } from '../../context/ListsContext'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
@@ -66,7 +66,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
   }
 
   return (
-        <>
+          <Fragment>
             {isEdit
               ? <OutlinedInput
                     id="outlined-adornment-weight"
@@ -118,7 +118,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
                 </Button>
               </DialogActions>
             </Dialog>
-        </>
+      </Fragment>
   )
 }
 
