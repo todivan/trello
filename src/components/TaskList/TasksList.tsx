@@ -47,7 +47,7 @@ const TasksList: React.FC<TListProps> = ({ list, isFocusOnNewList }: TListProps)
                     ))}
 
                     <Button variant="outlined" sx={{ color: 'white' }} startIcon={<AddIcon />} onClick={addNewTask}>
-                    Add a card
+                      Add a card
                     </Button>
                 </Stack>
             </Box>

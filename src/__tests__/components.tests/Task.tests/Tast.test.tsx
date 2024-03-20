@@ -16,12 +16,17 @@ const MockTask: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks,
 describe('Task tests', () => {
   test('Edit field exist', () => {
     const result = render(<MockTask key={1} task={taskValue} isFocusOnNew={true} collectionOfTasks={taskCollectionValue} setCollectionOfTasks={mockedSetCollectionOfTasks} />)
-    const linkElement = result.container.querySelector('#outlined-multiline-static')
-    expect(linkElement).toBeInTheDocument()
+    const element = result.container.querySelector('#outlined-multiline-static')
+    expect(element).toBeInTheDocument()
   })
   test('View field exist', () => {
     const result = render(<MockTask key={1} task={taskValue} isFocusOnNew={false} collectionOfTasks={taskCollectionValue} setCollectionOfTasks={mockedSetCollectionOfTasks} />)
-    const linkElement = result.container.querySelector('#outlined-adornment-weight')
-    expect(linkElement).toBeInTheDocument()
+    const element = result.container.querySelector('#outlined-adornment-weight')
+    expect(element).toBeInTheDocument()
+  })
+  test('Content menu exist but not visible', () => {
+    const result = render(<MockTask key={1} task={taskValue} isFocusOnNew={false} collectionOfTasks={taskCollectionValue} setCollectionOfTasks={mockedSetCollectionOfTasks} />)
+    const element = result.container.querySelector('#basic-menu')
+    expect(element).not.toBeInTheDocument()
   })
 })

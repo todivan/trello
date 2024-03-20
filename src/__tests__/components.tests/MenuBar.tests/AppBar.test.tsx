@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import SearchAppBar from '../../../components/MenuBar/AppBar'
 
-test('App bar text', () => {
+test('app bar text', () => {
   render(<SearchAppBar />)
-  const linkElement = screen.getByText('Trello (cover by Ivan)')
-  expect(linkElement).toBeInTheDocument()
+  const element = screen.getByText('Trello (cover by Ivan)')
+  expect(element).toBeInTheDocument()
 })
