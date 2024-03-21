@@ -1,11 +1,11 @@
-import { Stack } from "@mui/material";
-import LeftMenu from "../LeftMenu/LeftMenu";
-import Board from "../Board/Board";
+import { Stack } from '@mui/material'
+import LeftMenu from '../LeftMenu/LeftMenu'
+import Board from '../Board/Board'
 
 const MainContent = () => {
-    return (
+  return (
         <Stack
-            width="100%" 
+            width="100%"
             direction="row"
             justifyContent="flex-start"
             alignItems="flex-start"
@@ -14,7 +14,7 @@ const MainContent = () => {
             <LeftMenu></LeftMenu>
             <Board />
         </Stack>
-    );
+  )
 }
 
-export default MainContent;
+export default MainContent

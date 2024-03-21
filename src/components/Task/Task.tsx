@@ -1,86 +1,88 @@
-import { useCallback, useState } from "react";
-import { ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, TextField } from "@mui/material";
-import { TTask } from "../../types/CommonTypes";
-import ModeIcon from '@mui/icons-material/Mode';
-import React from "react";
-import NorthIcon from '@mui/icons-material/North';
-import SouthIcon from '@mui/icons-material/South';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import ItemDetails from "../ItemDetails";
-import { changePosition } from "../../Utils/ChangePosition";
+import React, { useCallback, useState } from 'react'
+import { ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, TextField } from '@mui/material'
+import { type TTask } from '../../types/CommonTypes'
+import ModeIcon from '@mui/icons-material/Mode'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
+import NorthIcon from '@mui/icons-material/North'
+import SouthIcon from '@mui/icons-material/South'
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
+import ItemDetails from '../ItemDetails'
+import { changePosition } from '../../Utils/ChangePosition'
 
-export type TTaskProps = {
-    key: React.Key;
-    task: TTask;
-    isFocusOnNew: boolean;
-    collectionOfTasks: TTask[]; 
-    setCollectionOfTasks: React.Dispatch<React.SetStateAction<TTask[]>>;
-  };
+export interface TTaskProps {
+  key: React.Key
+  task: TTask
+  isFocusOnNew: boolean
+  collectionOfTasks: TTask[]
+  setCollectionOfTasks: React.Dispatch<React.SetStateAction<TTask[]>>
+}
 
 const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, setCollectionOfTasks }) => {
+  const [isEdit, setIsEdit] = useState(isFocusOnNew)
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false)
 
-    const [isEdit, setIsEdit] = useState(isFocusOnNew);
+  const switchToEdit = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    setIsEdit(true)
+    event.stopPropagation()
+  }
 
-    const switchToEdit = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
-        setIsEdit(true);
-        event.stopPropagation();
-    };
+  const updateTask = (updatedItem: TTask) => {
+    setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)))
+  }
 
-    const updateTask = (updatedItem: TTask) => {
-        setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
-      };
-
-
-    const keyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if(e.key === 'Enter'){
-           setIsEdit(false);
-           const inputElement = e.target as HTMLInputElement; 
-           task.name = inputElement.value;
-           updateTask(task);
-        } else if (e.key === 'Escape') {
-            setIsEdit(false);
-        }
-     }
-
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleMenuClose = () => {
-      setAnchorEl(null);
-    };
-
-    const openTaskDetails = () => {
-        handleMenuClose();
-        setIsDetailsOpen(true);
+  const keyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      setIsEdit(false)
+      const inputElement = e.target as HTMLInputElement
+      task.name = inputElement.value
+      updateTask(task)
+    } else if (e.key === 'Escape') {
+      setIsEdit(false)
     }
+  }
 
-    const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
 
-    const updateCollection = useCallback((updatedList: TTask[]) => {
-        setCollectionOfTasks(updatedList);
-    }, [setCollectionOfTasks]);
+  const handleMenuClose = () => {
+    setAnchorEl(null)
+  }
 
-    const handleCloseDetails = () => {
-        setIsDetailsOpen(false);
-    };
+  const openTaskDetails = () => {
+    handleMenuClose()
+    setIsDetailsOpen(true)
+  }
 
-    const handleClickUp = () => {
-        handleMenuClose();
-        changePosition(task.id, -1, collectionOfTasks, updateCollection);
-      };
+  const updateCollection = useCallback((updatedList: TTask[]) => {
+    setCollectionOfTasks(updatedList)
+  }, [setCollectionOfTasks])
 
-      const handleClickDown = () => {
-        handleMenuClose();
-        changePosition(task.id, 1, collectionOfTasks, updateCollection);
-      };
+  const handleCloseDetails = () => {
+    setIsDetailsOpen(false)
+  }
 
-    return(
+  const handleClickUp = () => {
+    handleMenuClose()
+    changePosition(task.id, -1, collectionOfTasks, updateCollection)
+  }
+
+  const handleClickDown = () => {
+    handleMenuClose()
+    changePosition(task.id, 1, collectionOfTasks, updateCollection)
+  }
+
+  const handleClickDelete = () => {
+    handleMenuClose()
+    setCollectionOfTasks(prevTask => prevTask.filter(t => t.id !== task.id))
+  }
+
+  return (
         <>
-            {isEdit ? 
-            <TextField
+            {isEdit
+              ? <TextField
                 id="outlined-multiline-static"
                 label="Edit name"
                 multiline
@@ -89,16 +91,15 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                 defaultValue={task.name}
                 onKeyDown={keyPress}
                 autoFocus={isEdit}
-                sx={{  color:'white', padding:'10px 0px 10px 0px' }}
+                sx={{ color: 'white', padding: '10px 0px 10px 0px' }}
                 onFocus={event => {
-                    event.target.select();
+                  event.target.select()
                 }}
                 onBlur={() => {
-                    setIsEdit(false);
+                  setIsEdit(false)
                 }}
             />
-            :
-            <>
+              : <>
                 <OutlinedInput
                     id="outlined-adornment-weight"
                     multiline
@@ -107,10 +108,10 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                     defaultValue={task.name}
                     endAdornment={<ModeIcon fontSize="small" onClick={switchToEdit} cursor='pointer'></ModeIcon>}
                     aria-describedby="outlined-weight-helper-text"
-                    sx={{ border: '0px solid white', borderRadius:3, width:250, cursor: 'pointer', color:'white', '&:hover': {cursor: 'pointer',}}}
+                    sx={{ border: '0px solid white', borderRadius: 3, width: 250, cursor: 'pointer', color: 'white', '&:hover': { cursor: 'pointer' } }}
                     onClick={handleClick}
                     inputProps={{
-                    'aria-label': 'weight', readOnly: true,
+                      'aria-label': 'weight', readOnly: true
                     }}
                 />
                 <Menu
@@ -119,7 +120,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                     open={open}
                     onClose={handleMenuClose}
                     MenuListProps={{
-                    'aria-labelledby': 'basic-button',
+                      'aria-labelledby': 'basic-button'
                     }}
                 >
                     <MenuItem onClick={handleClickUp}>
@@ -134,18 +135,24 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                         </ListItemIcon>
                         <ListItemText>Move Down</ListItemText>
                     </MenuItem>
-                    <MenuItem onClick={openTaskDetails}>                        
+                    <MenuItem onClick={openTaskDetails}>
                         <ListItemIcon>
                             <MoreHorizIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText>Details</ListItemText>
+                    </MenuItem>
+                    <MenuItem onClick={handleClickDelete}>
+                        <ListItemIcon>
+                            <DeleteForeverIcon fontSize="small" />
+                        </ListItemIcon>
+                        <ListItemText>Delete</ListItemText>
                     </MenuItem>
                 </Menu>
                 <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={task.name} description={task.description} />
             </>
             }
         </>
-    );
+  )
 }
 
-export default Task;
+export default Task
