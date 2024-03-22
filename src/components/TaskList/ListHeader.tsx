@@ -20,7 +20,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
 
   const taskOfCurrentList = useMemo(() => {
     return [...collectionOfTasks].filter(x => x.listId === list.id)
-  }, [collectionOfTasks])
+  }, [collectionOfTasks, list.id])
 
   const openListDetails = () => {
     setIsDetailsOpen(true)

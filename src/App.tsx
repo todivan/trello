@@ -1,4 +1,3 @@
-import './App.css'
 import { ThemeProvider } from 'styled-components'
 import { ListProvider } from './context/ListsContext'
 import theme from './theme/Theme'
