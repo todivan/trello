@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material'
 import LeftMenu from '../LeftMenu/LeftMenu'
-import Board from '../Board/Board'
+import Board from './Board'
 
 const MainContent = () => {
   return (

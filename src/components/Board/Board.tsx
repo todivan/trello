@@ -1,6 +1,5 @@
 import React from 'react'
-
-import BoardContent from '../BoardContent/BoardContent'
+import BoardContent from '../Board/BoardContent'
 import { Stack } from '@mui/material'
 import BoardBar from '../MenuBar/BoardBar'
 

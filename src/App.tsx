@@ -2,7 +2,7 @@ import { ThemeProvider } from 'styled-components'
 import { ListProvider } from './context/ListsContext'
 import theme from './theme/Theme'
 import SearchAppBar from './components/MenuBar/AppBar'
-import MainContent from './components/Content/MainContent'
+import MainContent from './components/Board/MainContent'
 import { type ReactNode } from 'react'
 
 const rootStyles = {

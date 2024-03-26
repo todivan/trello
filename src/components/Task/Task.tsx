@@ -80,7 +80,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
   }
 
   return (
-        <>
+        <div data-testid={task.id}>
             {isEdit
               ? <TextField
                 id="outlined-multiline-static"
@@ -151,7 +151,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                 <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={task.name} description={task.description} />
             </>
             }
-        </>
+        </div>
   )
 }
 

@@ -66,7 +66,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
   }
 
   return (
-          <Fragment>
+          <div data-testid='list-header'>
             {isEdit
               ? <OutlinedInput
                     id="outlined-adornment-weight"
@@ -118,7 +118,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
                 </Button>
               </DialogActions>
             </Dialog>
-      </Fragment>
+      </div>
   )
 }
 
