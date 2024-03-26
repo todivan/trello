@@ -1,7 +1,7 @@
 import { Grid, OutlinedInput, Box, Dialog, DialogTitle, Button, DialogActions } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
 import { type TTask, type TList } from '../../types/CommonTypes'
-import { Fragment, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import ItemDetails from '../ItemDetails'
 import { useLists } from '../../context/ListsContext'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
@@ -68,40 +68,42 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
   return (
           <div data-testid='list-header'>
             {isEdit
-              ? <OutlinedInput
-                    id="outlined-adornment-weight"
-                    multiline
-                    minRows={1}
-                    maxRows={8}
-                    defaultValue={list.name}
-                    aria-describedby="outlined-weight-helper-text"
-                    onKeyDown={keyPress}
-                    autoFocus={true}
-                    sx={{ cursor: 'pointer', color: 'white', padding: '10px 0px 10px 0px' }}
-                    onFocus={event => {
-                      event.target.select()
-                    }}
-                    onBlur={() => {
-                      setIsEdit(false)
-                    }}
-                />
+              ? <div data-testid='ListHeaderEdit'>
+                  <OutlinedInput
+                      id="outlined-adornment-weight"
+                      multiline
+                      minRows={1}
+                      maxRows={8}
+                      defaultValue={list.name}
+                      aria-describedby="outlined-weight-helper-text"
+                      onKeyDown={keyPress}
+                      autoFocus={true}
+                      sx={{ cursor: 'pointer', color: 'white', padding: '10px 0px 10px 0px' }}
+                      onFocus={event => {
+                        event.target.select()
+                      }}
+                      onBlur={() => {
+                        setIsEdit(false)
+                      }}
+                  />
+                </div>
 
-              : <>
-                    <Grid container spacing={2} sx={{ border: '0px', width: 250, padding: 2, paddingRight: 0, paddingBottom: 0, cursor: 'pointer' }} >
-                        <Grid xs={10}>
+              : <div data-testid='ListHeaderView'>
+                    <Grid item={true} container spacing={2} sx={{ border: '0px', width: 250, padding: 2, paddingRight: 0, paddingBottom: 0, cursor: 'pointer' }} >
+                        <Grid item={true} xs={10}>
                             <div onClick={switchToEdit}>
                                 <Box display="flex" color={'white'}><b>{list.name}</b></Box>
                             </div>
                         </Grid>
-                        <Grid xs={1}>
+                        <Grid item={true} xs={1}>
                             <MoreHorizIcon sx={{ cursor: 'pointer', color: 'white' }} fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>
                         </Grid>
-                        <Grid xs={1}>
+                        <Grid item={true} xs={1}>
                             <DeleteForeverIcon sx={{ cursor: 'pointer', color: 'white' }} fontSize="small" onClick={openDeleteDialog} cursor='pointer'></DeleteForeverIcon>
                         </Grid>
                     </Grid>
                     <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={list.name} description={list.description} />
-                </>
+                </div>
             }
             <Dialog
               fullWidth

@@ -21,7 +21,7 @@ const ListMoveNavigation: React.FC<TListMoveNavigationProps> = ({ listId }: TLis
   }
 
   return (
-    <div data-testid='list-move-nav'>
+    <div data-testid='ListMoveNavigation'>
       <Box display="flex" justifyContent="space-between" padding={0} margin-top={0} color={'white'}>
           <Box textAlign="left" onClick={() => { handleClickMove(-1) }}>
               <West fontSize="small" cursor='pointer'></West>
