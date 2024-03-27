@@ -106,7 +106,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                     minRows={1}
                     maxRows={8}
                     defaultValue={task.name}
-                    endAdornment={<ModeIcon fontSize="small" onClick={switchToEdit} cursor='pointer'></ModeIcon>}
+                    endAdornment={<div data-testid='ModeIcon'><ModeIcon fontSize="small" onClick={switchToEdit} cursor='pointer'></ModeIcon></div>}
                     aria-describedby="outlined-weight-helper-text"
                     sx={{ border: '0px solid white', borderRadius: 3, width: 250, cursor: 'pointer', color: 'white', '&:hover': { cursor: 'pointer' } }}
                     onClick={handleClick}
