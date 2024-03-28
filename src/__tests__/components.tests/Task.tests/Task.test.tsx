@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import Task, { type TTaskProps } from '../../../components/Task/Task'
 import type { TTask } from '../../../types/CommonTypes'
 import React from 'react'
@@ -30,4 +30,12 @@ describe('Task tests', () => {
     const element = result.container.querySelector('#basic-menu')
     expect(element).not.toBeInTheDocument()
   })
+  // test('Switch to edit', () => {
+  //   const source = render(<MockTask key={1} task={taskValue} isFocusOnNew={false} collectionOfTasks={taskCollectionValue} setCollectionOfTasks={mockedSetCollectionOfTasks} />)
+  //   const editButton = source.getByTestId('ModeIcon')
+
+  //   fireEvent.click(editButton);
+  //   const element = source.container.querySelector('#outlined-multiline-static')  
+  //   expect(element).toBeInTheDocument()
+  // })
 })

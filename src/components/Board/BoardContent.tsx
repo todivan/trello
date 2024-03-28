@@ -25,6 +25,7 @@ const BoardContent = () => {
   }, [collectionOfLists])
 
   return (
+    <div data-testid='BoardContent'>
         <Stack
         direction="row"
         justifyContent="flex-start"
@@ -40,6 +41,7 @@ const BoardContent = () => {
                 </Button>
             </TaskProvider>
         </Stack>
+    </div>
   )
 }
 

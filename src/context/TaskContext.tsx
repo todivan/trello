@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react'
 import { type TTask, type TTaskContextType } from '../types/CommonTypes'
 
-const TaskContext = createContext<TTaskContextType | null>(null)
+export const TaskContext = createContext<TTaskContextType | null>(null)
 
 export const TaskProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [collectionOfTasks, setCollectionOfTasks] = useState<TTask[]>([
