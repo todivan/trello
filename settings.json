@@ -1,0 +1,4 @@
+{
+  "eslint.validate": [ "javascript", "javascriptreact", "html", "typescriptreact" ],
+  "eslint.nodePath": "C:\\Program Files\\nodejs"
+}
