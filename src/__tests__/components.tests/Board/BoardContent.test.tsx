@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react'
 import BoardContent from '../../../components/Board/BoardContent'
-import MockListContext from '../../../__TestMocks/MockListContext'
+import MockListContext from '../../__mocks__/MockListContext'
 
 const MockBoardContent: React.FC = () => {
   return (

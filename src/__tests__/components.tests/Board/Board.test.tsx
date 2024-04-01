@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import Board from '../../../components/Board/Board'
-import MockListContext from '../../../__TestMocks/MockListContext'
+import MockListContext from '../../__mocks__/MockListContext'
 
 describe('Board tests', () => {
   test('BoardBar exist', () => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListsContext } from '../context/ListsContext'
+import { ListsContext } from '../../context/ListsContext'
 
 const mockContextValue = {
   collectionOfLists: [

@@ -1,9 +1,10 @@
 {
+  "testEnvironment": "jsdom",
+  "verbose": true,
   "testPathIgnorePatterns": [
-    "src/__tests__/__TestMocks/*.tsx"
-  ],
-  "coveragePathIgnorePatterns": [
-    "src/reportWebVitals.js",
-    "src/__tests__/__TestMocks/*.tsx"
+    "/node_modules/",
+    "/src/__tests__/__mocks__/",
+    "/__tests__/__mocks__/",
+    "D:/Work/~SoftServe/Repo_trelo/src/__tests__/__mocks__/"
   ]
 }

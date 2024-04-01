@@ -2,7 +2,7 @@ import { cleanup, fireEvent, render } from '@testing-library/react'
 import React from 'react'
 import ListHeader, { type TListHeaderProps } from '../../../components/TaskList/ListHeader'
 import { type TTask, type TList } from '../../../types/CommonTypes'
-import MockListContext from '../../../__TestMocks/MockListContext'
+import MockListContext from '../../__mocks__/MockListContext'
 
 let listValue: TList = { id: 1, name: 'testTask', description: 'taskDescription', position: 3 }
 const taskCollectionValue: TTask[] = []

@@ -5,7 +5,8 @@ import React from 'react'
 describe('AppBar tests', () => {
   test('app bar text', () => {
     render(<SearchAppBar />)
-    const element = screen.getByText('Trello (cover by Ivan)')
+    const elementTest = 'Trello (cover by Ivan)'
+    const element = screen.getByText(elementTest)
     expect(element).toBeInTheDocument()
   })
 })
