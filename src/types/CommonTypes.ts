@@ -1,4 +1,4 @@
-import { type SortableObject } from '../Utils/ChangePosition'
+import { SortableObject } from '../Utils/ChangePosition'
 
 export interface TList {
   id: number

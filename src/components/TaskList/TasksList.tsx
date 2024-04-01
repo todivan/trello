@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add'
 import ListHeader from './ListHeader'
 import ListMoveNavigation from './ListMoveNavigation'
 import { useMemo, useState } from 'react'
-import { type TList } from '../../types/CommonTypes'
+import { TList } from '../../types/CommonTypes'
 
 export interface TListProps {
   list: TList

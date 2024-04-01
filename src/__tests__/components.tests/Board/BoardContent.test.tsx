@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 import BoardContent from '../../../components/Board/BoardContent'
 import MockListContext from '../../../__TestMocks/MockListContext'
 
@@ -22,5 +22,13 @@ describe('BoardContent tests', () => {
     expect(element).toBeInTheDocument()
     const elementT = getByTestId('4')
     expect(elementT).toBeInTheDocument()
+  })
+  test('Add card', () => {
+    const screen = render(<MockBoardContent />)
+    const addButton = screen.getByText('Add another list')
+
+    fireEvent.click(addButton);
+    const elements = screen.getAllByTestId('3')
+    expect(elements).toHaveLength(1)
   })
 })

@@ -1,0 +1,9 @@
+{
+  "testPathIgnorePatterns": [
+    "src/__tests__/__TestMocks/*.tsx"
+  ],
+  "coveragePathIgnorePatterns": [
+    "src/reportWebVitals.js",
+    "src/__tests__/__TestMocks/*.tsx"
+  ]
+}

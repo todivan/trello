@@ -1,6 +1,7 @@
+import React from 'react'
 import { Grid, OutlinedInput, Box, Dialog, DialogTitle, Button, DialogActions } from '@mui/material'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
-import { type TTask, type TList } from '../../types/CommonTypes'
+import { TTask, TList } from '../../types/CommonTypes'
 import { useMemo, useState } from 'react'
 import ItemDetails from '../ItemDetails'
 import { useLists } from '../../context/ListsContext'
@@ -21,14 +22,6 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
   const taskOfCurrentList = useMemo(() => {
     return [...collectionOfTasks].filter(x => x.listId === list.id)
   }, [collectionOfTasks, list.id])
-
-  const openListDetails = () => {
-    setIsDetailsOpen(true)
-  }
-
-  const handleCloseDetails = () => {
-    setIsDetailsOpen(false)
-  }
 
   const switchToEdit = () => {
     setIsEdit(true)
@@ -91,18 +84,18 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
               : <div data-testid='ListHeaderView'>
                     <Grid item={true} container spacing={2} sx={{ border: '0px', width: 250, padding: 2, paddingRight: 0, paddingBottom: 0, cursor: 'pointer' }} >
                         <Grid item={true} xs={10}>
-                            <div onClick={switchToEdit}>
+                            <div data-testid='ListName' onClick={switchToEdit}>
                                 <Box display="flex" color={'white'}><b>{list.name}</b></Box>
                             </div>
                         </Grid>
                         <Grid item={true} xs={1}>
-                            <MoreHorizIcon sx={{ cursor: 'pointer', color: 'white' }} fontSize="small" onClick={openListDetails} cursor='pointer'></MoreHorizIcon>
+                            <div data-testid='DetailsIcon'><MoreHorizIcon sx={{ cursor: 'pointer', color: 'white' }} fontSize="small" onClick={() => setIsDetailsOpen(true)} cursor='pointer'></MoreHorizIcon></div>
                         </Grid>
-                        <Grid item={true} xs={1}>
-                            <DeleteForeverIcon sx={{ cursor: 'pointer', color: 'white' }} fontSize="small" onClick={openDeleteDialog} cursor='pointer'></DeleteForeverIcon>
+                        <Grid data-testid='DeleteForeverIcon' item={true} xs={1}>
+                            <DeleteForeverIcon aria-label='DeleteForeverIcon' role='button' sx={{ cursor: 'pointer', color: 'white' }} fontSize="small" onClick={openDeleteDialog} cursor='pointer'></DeleteForeverIcon>
                         </Grid>
                     </Grid>
-                    <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={list.name} description={list.description} />
+                    <ItemDetails isOpen={isDetailsOpen} handleClose={() => setIsDetailsOpen(false)} name={list.name} description={list.description} />
                 </div>
             }
             <Dialog

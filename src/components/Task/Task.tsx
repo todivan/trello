@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, TextField } from '@mui/material'
-import { type TTask } from '../../types/CommonTypes'
+import { TTask } from '../../types/CommonTypes'
 import ModeIcon from '@mui/icons-material/Mode'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import NorthIcon from '@mui/icons-material/North'
@@ -101,6 +101,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
             />
               : <>
                 <OutlinedInput
+                    data-testid='OutlinedInput'
                     id="outlined-adornment-weight"
                     multiline
                     minRows={1}
@@ -115,6 +116,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                     }}
                 />
                 <Menu
+                    data-testid='Menu'
                     id="basic-menu"
                     anchorEl={anchorEl}
                     open={open}
@@ -123,25 +125,25 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                       'aria-labelledby': 'basic-button'
                     }}
                 >
-                    <MenuItem onClick={handleClickUp}>
+                    <MenuItem data-testid='ClickUp' onClick={handleClickUp}>
                         <ListItemIcon>
                             <NorthIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText>Move Up</ListItemText>
                     </MenuItem>
-                    <MenuItem onClick={handleClickDown}>
+                    <MenuItem data-testid='ClickDown' onClick={handleClickDown}>
                         <ListItemIcon>
                             <SouthIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText>Move Down</ListItemText>
                     </MenuItem>
-                    <MenuItem onClick={openTaskDetails}>
+                    <MenuItem data-testid='OpenDetails' onClick={openTaskDetails}>
                         <ListItemIcon>
                             <MoreHorizIcon fontSize="small" />
                         </ListItemIcon>
                         <ListItemText>Details</ListItemText>
                     </MenuItem>
-                    <MenuItem onClick={handleClickDelete}>
+                    <MenuItem data-testid='Delete' onClick={handleClickDelete}>
                         <ListItemIcon>
                             <DeleteForeverIcon fontSize="small" />
                         </ListItemIcon>

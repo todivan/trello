@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from 'react'
-import { type TListContextType, type TList } from '../types/CommonTypes'
+import { TListContextType, TList } from '../types/CommonTypes'
 
 export const ListsContext = createContext<TListContextType | null>(null)
 

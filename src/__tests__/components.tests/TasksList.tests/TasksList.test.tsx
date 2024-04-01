@@ -58,12 +58,12 @@ describe('TasksList tests', () => {
     const elementT = getByTestId('4')
     expect(elementT).toBeInTheDocument()
   })
-  // test('Add card', () => {
-  //   const screen = render(<MockTasksList key={1} list={listValue} isFocusOnNewList={false} />)
-  //   const addButton = screen.getByText('Add a card')
+  test('Add card', () => {
+    const screen = render(<MockTasksList key={1} list={listValue} isFocusOnNewList={false} />)
+    const addButton = screen.getByText('Add a card')
 
-  //   fireEvent.click(addButton);
-  //   const elements = screen.getAllByTestId('3')
-  //   expect(elements).toHaveLength(2)
-  // })
+    fireEvent.click(addButton);
+    const elements = screen.getAllByTestId('3')
+    expect(elements).toHaveLength(1)
+  })
 })

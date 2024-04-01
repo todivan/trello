@@ -10,6 +10,7 @@ export interface TTaskDetailsProps {
 
 const ItemDetails: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, name, description }) => {
   return (
+    <div data-testid='ItemDetails'>
         <Dialog open={isOpen} onClose={handleClose} >
           <DialogTitle sx={{ color: 'white', backgroundColor: 'black' }}><b>Name: </b>{name}</DialogTitle>
           <DialogContent sx={{ color: 'white', backgroundColor: 'black' }}>
@@ -19,6 +20,7 @@ const ItemDetails: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, name, d
             <Button onClick={handleClose} color="primary">Close</Button>
           </DialogActions>
         </Dialog>
+    </div>
   )
 }
 
