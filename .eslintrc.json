@@ -4,6 +4,7 @@
         "es2021": true,
         "jest/globals": true
     },
+    //"files": ["*.js'", "*.jsx", "*.ts", "*.tsx"],
     "extends": [
         "standard-with-typescript",
         "eslint:recommended",
@@ -24,6 +25,8 @@
     ],
     "ignorePatterns": ["reportWebVitals.js"],
     "rules": {
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-misused-promises": "off",
