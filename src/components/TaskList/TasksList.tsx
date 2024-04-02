@@ -1,5 +1,5 @@
 import Task from '../Task/Task'
-import { TaskProvider, useTasks } from '../../context/TaskContext'
+import { useTasks } from '../../context/TaskContext'
 import { Box, Button, Stack } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import ListHeader from './ListHeader'
@@ -34,22 +34,20 @@ const TasksList: React.FC<TListProps> = ({ list, isFocusOnNewList }: TListProps)
 
   return (
     <div data-testid={list.id}>
-      <TaskProvider>
-          <Box borderRadius={3} sx={{ bgcolor: '#323a48', padding: '10px' }}>
-              <Stack spacing={1}>
-                  <ListHeader list={list} isFocusOnNewList={isFocusOnNewList} collectionOfTasks={collectionOfTasks}/>
-                  <ListMoveNavigation listId={list.id} />
+      <Box borderRadius={3} sx={{ bgcolor: '#323a48', padding: '10px' }}>
+          <Stack spacing={1}>
+              <ListHeader list={list} isFocusOnNewList={isFocusOnNewList} collectionOfTasks={collectionOfTasks}/>
+              <ListMoveNavigation listId={list.id} />
 
-                {sortedTasks.filter(x => x.listId === list.id).map((item) => (
-                    <Task key={item.id} task={item} isFocusOnNew={newAddedId === item.id} collectionOfTasks={collectionOfTasks} setCollectionOfTasks={setCollectionOfTasks} />
-                ))}
+            {sortedTasks.filter(x => x.listId === list.id).map((item) => (
+                <Task key={item.id} task={item} isFocusOnNew={newAddedId === item.id} collectionOfTasks={collectionOfTasks} setCollectionOfTasks={setCollectionOfTasks} />
+            ))}
 
-                <Button variant="outlined" sx={{ color: 'white' }} startIcon={<AddIcon />} onClick={addNewTask}>
-                  Add a card
-                </Button>
-              </Stack>
-          </Box>
-      </TaskProvider>
+            <Button variant="outlined" sx={{ color: 'white' }} startIcon={<AddIcon />} onClick={addNewTask}>
+              Add a card
+            </Button>
+          </Stack>
+      </Box>
     </div>
   )
 }

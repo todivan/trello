@@ -6,7 +6,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import NorthIcon from '@mui/icons-material/North'
 import SouthIcon from '@mui/icons-material/South'
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz'
-import ItemDetails from '../ItemDetails'
+import TaskDetails from './TaskDetails'
 import { changePosition } from '../../Utils/ChangePosition'
 
 export interface TTaskProps {
@@ -150,7 +150,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                         <ListItemText>Delete</ListItemText>
                     </MenuItem>
                 </Menu>
-                <ItemDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={task.name} description={task.description} />
+                <TaskDetails isOpen={isDetailsOpen} handleClose={handleCloseDetails} name={task.name} description={task.description} listId={task.listId} taskId={task.id} />
             </>
             }
         </div>
