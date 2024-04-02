@@ -1,14 +1,14 @@
 import React from 'react'
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material'
 
-export interface TTaskDetailsProps {
+export interface TItemDetailsProps {
   name: string
   description: string
   handleClose: () => void
   isOpen: boolean
 }
 
-const ItemDetails: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, name, description }) => {
+const ItemDetails: React.FC<TItemDetailsProps> = ({ isOpen, handleClose, name, description }) => {
   return (
     <div data-testid='ItemDetails'>
         <Dialog open={isOpen} onClose={handleClose} >
