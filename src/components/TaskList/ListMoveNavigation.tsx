@@ -1,9 +1,9 @@
 import { East, West } from '@mui/icons-material'
 import { Box } from '@mui/material'
-import { TList } from '../../types/CommonTypes'
+import type { TList } from '../../types/CommonTypes'
 import { useLists } from '../../context/ListsContext'
 import { changePosition } from '../../Utils/ChangePosition'
-import { useCallback } from 'react'
+import React, { useCallback } from 'react'
 
 export interface TListMoveNavigationProps {
   listId: number

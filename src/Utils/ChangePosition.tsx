@@ -46,4 +46,4 @@ export function changePosition<T extends SortableObject> (
   })
 
   updateCollection(updatedList)
-};
+}
