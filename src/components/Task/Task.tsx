@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import { ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, TextField } from '@mui/material'
-import { TTask } from '../../types/CommonTypes'
+import { type TTask } from '../../types/CommonTypes'
 import ModeIcon from '@mui/icons-material/Mode'
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
 import NorthIcon from '@mui/icons-material/North'
