@@ -88,7 +88,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
                         sx={{ border: '0px', width: 250, padding: 2, paddingRight: 0, paddingBottom: 0, cursor: 'pointer' }}
                     >
                         <Grid item={true} xs={10}>
-                            <div data-testid='ListName' onClick={switchToEdit}>
+                            <div data-testid='ListName' onClick={() => switchToEdit}>
                                 <Box display="flex" color="white">
                                     <b>
                                         {list.name}

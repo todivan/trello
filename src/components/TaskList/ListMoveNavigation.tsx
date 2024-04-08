@@ -24,10 +24,10 @@ const ListMoveNavigation: React.FC<TListMoveNavigationProps> = ({ listId }: TLis
         <div data-testid='ListMoveNavigation'>
             <Box
                 display="flex"
-                justifyContent="space-between"
+                justifyContent='space-between'
                 padding={0}
                 margin-top={0}
-                color="white"
+                color='white'
             >
                 <Box
                     data-testid='leftIcon'
