@@ -77,14 +77,14 @@ export default function SearchAppBar () {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-            Trello (cover by Ivan)
+                        Trello (cover by Ivan)
                     </Typography>
                     <Button variant="contained">Workspace</Button>
                     <Button variant="contained">Recent</Button>
                     <Button variant="contained">Starred</Button>
                     <Button variant="contained">Teamplates</Button>
 
-          <Search>
+                    <Search>
                         <SearchIconWrapper>
                             <SearchIcon />
                         </SearchIconWrapper>
