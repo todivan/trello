@@ -18,7 +18,7 @@ function App (): ReactNode {
             <ThemeProvider theme={theme}>
                 <SearchAppBar />
 
-        <ListProvider>
+                <ListProvider>
                     <MainContent />
                 </ListProvider>
             </ThemeProvider>
