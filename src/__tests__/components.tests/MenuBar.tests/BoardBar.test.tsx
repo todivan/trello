@@ -1,8 +1,11 @@
-import { render, screen } from '@testing-library/react'
-import BoardBar from '../../../components/MenuBar/BoardBar'
+import { render, screen } from '@testing-library/react';
+import BoardBar from '../../../components/MenuBar/BoardBar';
+import React from 'react';
 
-test('board bar text', () => {
-  render(<BoardBar />)
-  const element = screen.getByText('Board name')
-  expect(element).toBeInTheDocument()
-})
+describe('BoardBar tests', () => {
+    test('board bar text', () => {
+        render(<BoardBar />);
+        const element = screen.getByText('Board name');
+        expect(element).toBeInTheDocument();
+    });
+});
