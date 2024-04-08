@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from 'react'
-import { type TTask, type TTaskContextType } from '../types/CommonTypes'
+import React, { createContext, useContext, useState } from 'react';
+import { type TTask, type TTaskContextType } from '../types/CommonTypes';
 
 export const TaskContext = createContext<TTaskContextType | null>(null);
 
