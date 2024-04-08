@@ -4,7 +4,9 @@
   "testPathIgnorePatterns": [
     "/node_modules/",
     "/src/__tests__/__mocks__/",
-    "/__tests__/__mocks__/",
-    "D:/Work/~SoftServe/Repo_trelo/src/__tests__/__mocks__/"
+    "/**/__tests__/__mocks__/",
+    "D:/Work/~SoftServe/Repo_trelo/src/__tests__/__mocks__/",
+    "<rootDir>/src/__tests__/__mocks__/",
+    "<rootDir>/src/__tests__/__mocks__/MockListContext.tsx"
   ]
 }
