@@ -9,6 +9,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { changePosition } from '../../Utils/ChangePosition';
 import TaskDetails from './TaskDetails';
 import { useTasks } from '../../context/TaskContext';
+import { taskSchema } from '../../Validations/TaskValidation';
 
 export interface TTaskProps {
     key: React.Key
@@ -28,8 +29,12 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew }) => {
         event.stopPropagation();
     };
 
-    const updateTask = (updatedItem: TTask): void => {
-        setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
+    const updateTask = async (updatedItem: TTask): void => {
+        if (await taskSchema.isValid(updatedItem)) {
+            setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)))
+        } else {
+            alert('Task properties are not valid!')
+        }
     };
 
     const keyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -167,7 +172,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew }) => {
                         description={task.description}
                         listId={task.listId}
                         taskId={task.id}
-                        setMode={() => alert("setMode not valid")}
+                        setMode={() => { alert('setMode not valid') }}
                     />
                 </>}
         </div>

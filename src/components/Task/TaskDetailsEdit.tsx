@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import { Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, Select, type SelectChangeEvent } from '@mui/material'
-import { TTaskDetailsProps } from './TaskDetails'
-import { taskSchema } from '../../Validations/TaskValidation'
-import { useLists } from '../../context/ListsContext'
-import { useTasks } from '../../context/TaskContext'
+import React, { useState } from 'react';
+import Button from '@mui/material/Button';
+import { Dialog, DialogActions, DialogContent, DialogTitle, MenuItem, Select, TextField, type SelectChangeEvent } from '@mui/material';
+import { TTaskDetailsProps } from './TaskDetails';
+import { taskSchema } from '../../Validations/TaskValidation';
+import { useLists } from '../../context/ListsContext';
+import { useTasks } from '../../context/TaskContext';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface FormValues {
     name: string
@@ -16,12 +17,27 @@ interface FormValues {
 const TaskDetailsEdit: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, name, description, listId, taskId }) => {
     const { collectionOfLists } = useLists();
     const { setCollectionOfTasks } = useTasks();
-    
     const [formValues, setFormValues] = useState<FormValues>({
         name: name,
         description: description,
         listId: listId
     });
+
+    const form = useForm<FormValues>({
+        defaultValues: formValues,
+        resolver: yupResolver(taskSchema)
+      });
+
+      const { register, handleSubmit, formState } = form;
+      const { errors } = formState;
+      const onSubmit = (data: FormValues) => {
+        setCollectionOfTasks(prevObjects =>
+            prevObjects.map(obj =>
+                obj.id === taskId ? { ...obj, listId: formValues.listId, name: data.name, description: data.description } : obj
+            )
+        );
+        handleClose()
+      };
 
     const handleChangeStatus = (event: SelectChangeEvent<number>) => {
         const selectedListId = event.target.value as number;
@@ -31,64 +47,51 @@ const TaskDetailsEdit: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, nam
         }))
     };
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = event.target;
-        setFormValues(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
-    };
-
-    const handleUpdate = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
-        const isValid = await taskSchema.isValid(formValues)
-        if(isValid) {
-            setCollectionOfTasks(prevObjects =>
-                prevObjects.map(obj =>
-                    obj.id === taskId ? { ...obj, listId: formValues.listId, name: formValues.name, description: formValues.description } : obj
-                )
-            );
-            handleClose()
-        } else {
-            alert("Invalid inputs!!!")
-        }
-    };
-
     return (
         <div data-testid='TaskDetailsEdit'>
-        <Dialog open={isOpen} onClose={handleClose} >
-            <form onSubmit={handleUpdate}>
+        <Dialog open={isOpen} onClose={handleClose}>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <DialogTitle sx={{ color: 'white', backgroundColor: 'black' }}>
                     Edit Details
                 </DialogTitle>
                 <DialogContent sx={{ color: 'white', backgroundColor: 'black' }}>
-                <b>Name: </b>
+
+                    <div className='form-control'>
+                    <label htmlFor='name'>Name</label>
                     <TextField
+                        type='text'
+                        id='name'
+                        {...register('name')}
                         InputProps={{
-                            style: { color: 'white' } // Set the text color to white
+                            style: { color: 'white' }
                           }}
                         name="name"
                         label="Name"
-                        value={formValues.name}
                         fullWidth
                         margin="normal"
-                        onChange={handleChange}
                     />
+                    <p style={{ color: 'red' }}>{errors.name?.message}</p>
+                    </div>
 
-                <b>Description: </b>
-                <TextField
-                    InputProps={{
-                        style: { color: 'white' } // Set the text color to white
-                      }}
-                    name="description"
-                    label="Description"
-                    value={formValues.description}
-                    fullWidth
-                    margin="normal"
-                    onChange={handleChange}
-                />
-                   
-                    <b>Status:</b>
+                    <div className='form-control'>
+                    <label htmlFor='description'>Description</label>
+                    <TextField
+                        type='descriptiontext'
+                        id='description'
+                        {...register('description')}
+                        InputProps={{
+                            style: { color: 'white' }
+                        }}
+                        name="description"
+                        label="Description"
+                        fullWidth
+                        margin="normal"
+                    />
+                    <p style={{ color: 'red' }}>{errors.description?.message}</p>
+                    </div>
+
+                    <div className='form-control'>
+                    <label htmlFor='status'>Status</label>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
@@ -107,7 +110,9 @@ const TaskDetailsEdit: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, nam
                             </MenuItem>
                         ))}
                     </Select>
-                    
+                    <p color='red'>{errors.listId?.message}</p>
+                    </div>
+
                 </DialogContent>
                 <DialogActions sx={{ color: 'white', backgroundColor: 'black' }}>
                     <Button type="submit" color="primary">OK</Button>
@@ -116,7 +121,7 @@ const TaskDetailsEdit: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, nam
             </form>
         </Dialog>
         </div>
-    )
-}
+    );
+};
 
-export default TaskDetailsEdit
+export default TaskDetailsEdit;
