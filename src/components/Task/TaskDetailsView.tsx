@@ -9,7 +9,7 @@ const TaskDetailsView: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, nam
     const { collectionOfLists } = useLists();
 
     return (
-        <div data-testid='TaskDetails'>
+        <div data-testid='TaskDetailsView'>
             <Dialog sx={{ width: 500, maxHeight: 600, margin: 'auto' }} open={isOpen} onClose={handleClose} >
                 <DialogTitle sx={{ color: 'white', backgroundColor: 'black' }}>
                     <b>Name: </b>
@@ -26,11 +26,13 @@ const TaskDetailsView: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, nam
                     </p>
                 </DialogContent>
                 <DialogActions sx={{ color: 'white', backgroundColor: 'black' }}>
-                    <IconButton color="primary" aria-label="edit"
-                        onClick={() => { setMode ? setMode(true) : alert('setMode not defined') }}
-                    >
-                        <EditIcon />
-                    </IconButton>
+                    <div data-testid='ButtonEdit'>
+                        <IconButton color="primary" aria-label="edit"
+                            onClick={() => { setMode ? setMode(true) : alert('setMode not defined') }}
+                        >
+                            <EditIcon />
+                        </IconButton>
+                    </div>
                     <Button color="primary" onClick={handleClose}>Close</Button>
                 </DialogActions>
             </Dialog>

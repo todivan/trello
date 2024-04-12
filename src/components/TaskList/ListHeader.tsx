@@ -99,7 +99,7 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
                         <Grid item={true} xs={1}>
                             <div data-testid='DetailsIcon'>
                                 <MoreHorizIcon
-                                    sx={{ cursor: 'pointer', color: 'white', padding: 1 }}
+                                    sx={{ cursor: 'pointer', color: 'white' }}
                                     fontSize="small"
                                     cursor='pointer'
                                     onClick={() => { setIsDetailsOpen(true); }}
@@ -124,7 +124,6 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
                     <ItemDetails
                         isOpen={isDetailsOpen}
                         handleClose={() => { setIsDetailsOpen(false); }}
-                        name={list.name}
                         description={list.description}
                         list={list}
                     />

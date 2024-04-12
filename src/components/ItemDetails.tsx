@@ -8,14 +8,13 @@ import { listSchema } from '../Validations/ListValidation';
 import { useLists } from '../context/ListsContext';
 
 export interface TItemDetailsProps {
-    name: string
     description: string
     handleClose: () => void
     isOpen: boolean
     list: TList
 }
 
-const ItemDetails: React.FC<TItemDetailsProps> = ({ isOpen, handleClose, name, description, list }) => {
+const ItemDetails: React.FC<TItemDetailsProps> = ({ isOpen, handleClose, description, list }) => {
     const [isEdit, setIsEdit] = useState(false);
     const { setCollectionOfLists } = useLists();
 
@@ -43,7 +42,7 @@ const ItemDetails: React.FC<TItemDetailsProps> = ({ isOpen, handleClose, name, d
     };
 
     return (
-        <div data-testid='ItemDetailsEdit'>
+        <div data-testid='ItemListDetails'>
             <Dialog
                 sx={{ minWidth: 500, maxHeight: 600, margin: 'auto' }}
                 open={isOpen}
