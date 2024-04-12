@@ -16,7 +16,6 @@ const MockTaskDetails = ({ isOpenParam }: { isOpenParam: boolean }) => {
                 <ItemDetails
                     isOpen={isOpenParam}
                     handleClose={mockedHandleClose}
-                    description='testDescription'
                     list={list} />
             </TaskProvider>
         </MockListContext>

@@ -124,7 +124,6 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
                     <ItemDetails
                         isOpen={isDetailsOpen}
                         handleClose={() => { setIsDetailsOpen(false); }}
-                        description={list.description}
                         list={list}
                     />
                 </div>}
