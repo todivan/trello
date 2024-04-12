@@ -10,7 +10,7 @@ const TaskDetailsView: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, nam
 
     return (
         <div data-testid='TaskDetails'>
-            <Dialog open={isOpen} onClose={handleClose} >
+            <Dialog sx={{ width: 500, maxHeight: 600, margin: 'auto' }} open={isOpen} onClose={handleClose} >
                 <DialogTitle sx={{ color: 'white', backgroundColor: 'black' }}>
                     <b>Name: </b>
                     {name}
@@ -26,7 +26,7 @@ const TaskDetailsView: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, nam
                     </p>
                 </DialogContent>
                 <DialogActions sx={{ color: 'white', backgroundColor: 'black' }}>
-                    <IconButton color="primary" aria-label="edit" 
+                    <IconButton color="primary" aria-label="edit"
                         onClick={() => { setMode ? setMode(true) : alert('setMode not defined') }}
                     >
                         <EditIcon />
