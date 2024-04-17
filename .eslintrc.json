@@ -29,6 +29,7 @@
         "reportWebVitals.js"
     ],
     "rules": {
+        "@typescript-eslint/no-unsafe-argument":"off",
         "@typescript-eslint/no-misused-promises":"off",
         "react/jsx-uses-vars": "error",
         "@typescript-eslint/no-invalid-void-type": 0,
