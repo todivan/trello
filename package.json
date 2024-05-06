@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.9.11",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@hookform/resolvers": "^3.3.4",
@@ -16,6 +17,7 @@
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "graphql": "^16.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.3",

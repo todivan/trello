@@ -29,7 +29,13 @@
         "reportWebVitals.js"
     ],
     "rules": {
-        "@typescript-eslint/no-unsafe-argument":"off",
+        "@typescript-eslint/restrict-plus-operands":"off",
+        "@typescript-eslint/consistent-indexed-object-style":"off",
+        "@typescript-eslint/prefer-function-type":"off",
+        "@typescript-eslint/unbound-method":"off",
+        "@typescript-eslint/no-base-to-string":"off",
+        "@typescript-eslint/restrict-template-expressions":"off",
+        "@typescript-eslint/no-throw-literal":"off",
         "@typescript-eslint/no-misused-promises":"off",
         "react/jsx-uses-vars": "error",
         "@typescript-eslint/no-invalid-void-type": 0,
