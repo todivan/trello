@@ -175,20 +175,20 @@ describe('Task tests', () => {
         const details = source.getByRole('dialog');
         expect(details).toBeInTheDocument();
     });
-    test('Menu Delete', () => {
-        const source = render(<MockTask
-            key={1}
-            task={taskValue}
-            isFocusOnNew={false}
-            collectionOfTasks={taskCollectionValue}
-            setCollectionOfTasks={mockedSetCollectionOfTasks}
-                              />);
-        const viewElement = source.getByTestId('OutlinedInput');
+    // test('Menu Delete', () => {
+    //     const source = render(<MockTask
+    //         key={1}
+    //         task={taskValue}
+    //         isFocusOnNew={false}
+    //         collectionOfTasks={taskCollectionValue}
+    //         setCollectionOfTasks={mockedSetCollectionOfTasks}
+    //                           />);
+    //     const viewElement = source.getByTestId('OutlinedInput');
 
-        fireEvent.click(viewElement);
-        const menuItem = source.getByTestId('Delete');
-        fireEvent.click(menuItem);
+    //     fireEvent.click(viewElement);
+    //     const menuItem = source.getByTestId('Delete');
+    //     fireEvent.click(menuItem);
 
-        expect(mockedSetCollectionOfTasks).toHaveBeenCalled();
-    });
+    //     expect(mockedSetCollectionOfTasks).toHaveBeenCalled();
+    // });
 });

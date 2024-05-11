@@ -1,7 +1,6 @@
-import React from 'react';
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Select, MenuItem, type SelectChangeEvent } from '@mui/material';
-import { useLists } from '../../context/ListsContext';
-import { useTasks } from '../../context/TaskContext';
+import React, { useState } from 'react';
+import TaskDetailsView from './TaskDetailsView';
+import TaskDetailsEdit from './TaskDetailsEdit';
 
 export interface TTaskDetailsProps {
     name: string
@@ -10,60 +9,37 @@ export interface TTaskDetailsProps {
     isOpen: boolean
     taskId: number
     listId: number
+    setMode: (isEditProp: boolean) => void
 }
 
 const TaskDetails: React.FC<TTaskDetailsProps> = ({ isOpen, handleClose, name, description, listId, taskId }) => {
-    const { collectionOfLists } = useLists();
-    const { setCollectionOfTasks } = useTasks();
+    const [isEdit, setIsEdit] = useState(false);
 
-    const handleChange = (event: SelectChangeEvent<number>) => {
-        const selectedListId = event.target.value as number;
-        setCollectionOfTasks(prevObjects =>
-            prevObjects.map(obj =>
-                obj.id === taskId ? { ...obj, listId: selectedListId } : obj
-            )
-        );
-    };
+    const handleCloseImpl = () => {
+        setIsEdit(false);
+        handleClose();
+    }
 
     return (
-        <div data-testid='TaskDetails'>
-            <Dialog open={isOpen} onClose={handleClose} >
-                <DialogTitle sx={{ color: 'white', backgroundColor: 'black' }}>
-                    <b>Name: </b>
-                    {name}
-                </DialogTitle>
-                <DialogContent sx={{ color: 'white', backgroundColor: 'black' }}>
-                    <p>
-                        <b>Description: </b>
-                        {description}
-                    </p>
-                    <p>
-State:
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={listId}
-                            label="Age"
-                            sx={{ color: 'white' }}
-                            onChange={handleChange}
-                        >
-                            {collectionOfLists.map((item) => (
-                                <MenuItem
-                                    key={item.id}
-                                    color='white'
-                                    value={item.id}
-                                >
-                                    {item.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </p>
-                </DialogContent>
-                <DialogActions sx={{ color: 'white', backgroundColor: 'black' }}>
-                    <Button color="primary" onClick={handleClose}>Close</Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+        isEdit
+            ? <TaskDetailsEdit
+                isOpen={isOpen}
+                handleClose={handleCloseImpl}
+                name={name}
+                description={description}
+                listId={listId}
+                taskId={taskId}
+                setMode={setIsEdit}
+            />
+            : <TaskDetailsView
+                isOpen={isOpen}
+                handleClose={handleCloseImpl}
+                name={name}
+                description={description}
+                listId={listId}
+                taskId={taskId}
+                setMode={setIsEdit}
+            />
     );
 };
 

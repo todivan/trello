@@ -6,8 +6,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import NorthIcon from '@mui/icons-material/North';
 import SouthIcon from '@mui/icons-material/South';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import TaskDetails from './TaskDetails';
 import { changePosition } from '../../Utils/ChangePosition';
+import TaskDetails from './TaskDetails';
+import { useTasks } from '../../context/TaskContext';
 
 export interface TTaskProps {
     key: React.Key
@@ -17,7 +18,8 @@ export interface TTaskProps {
     setCollectionOfTasks: React.Dispatch<React.SetStateAction<TTask[]>>
 }
 
-const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, setCollectionOfTasks }) => {
+const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew }) => {
+    const { collectionOfTasks, setCollectionOfTasks } = useTasks();
     const [isEdit, setIsEdit] = useState(isFocusOnNew);
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
 
@@ -27,7 +29,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
     };
 
     const updateTask = (updatedItem: TTask): void => {
-        setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
+        setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)))
     };
 
     const keyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -165,6 +167,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew, collectionOfTasks, set
                         description={task.description}
                         listId={task.listId}
                         taskId={task.id}
+                        setMode={() => { alert('setMode not valid') }}
                     />
                 </>}
         </div>
