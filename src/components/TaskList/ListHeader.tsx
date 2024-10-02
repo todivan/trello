@@ -5,6 +5,8 @@ import { type TTask, type TList } from '../../types/CommonTypes';
 import ItemDetails from '../ItemDetails';
 import { useLists } from '../../context/ListsContext';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useGlobalModalActionsContext } from '../Modal/GlobalModal';
+import { ListDetailsModal } from '../Modal/ListDetailsModal';
 
 export interface TListHeaderProps {
     list: TList
@@ -17,6 +19,15 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
     const { setCollectionOfLists } = useLists();
     const [openDialog, setOpenDialog] = useState(false);
+    const { showModal } = useGlobalModalActionsContext();
+
+    const createModal = () => {
+        showModal({
+            title: 'View List Details',
+            content: <ListDetailsModal list={list} />,
+            buttonTitle: 'Save'
+        });
+    };
 
     const taskOfCurrentList = useMemo(() => {
         return [...collectionOfTasks].filter(x => x.listId === list.id);
@@ -102,7 +113,8 @@ const ListHeader: React.FC<TListHeaderProps> = ({ list, isFocusOnNewList, collec
                                     sx={{ cursor: 'pointer', color: 'white' }}
                                     fontSize="small"
                                     cursor='pointer'
-                                    onClick={() => { setIsDetailsOpen(true); }}
+                                    // onClick={() => { setIsDetailsOpen(true); }}
+                                    onClick={() => { createModal(); }}
                                 />
                             </div>
                         </Grid>

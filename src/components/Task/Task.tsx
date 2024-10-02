@@ -9,6 +9,7 @@ import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import { changePosition } from '../../Utils/ChangePosition';
 import TaskDetails from './TaskDetails';
 import { useTasks } from '../../context/TaskContext';
+// import { useGlobalModalContext } from '../Modal/GlobalModal';
 
 export interface TTaskProps {
     key: React.Key
@@ -22,6 +23,14 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew }) => {
     const { collectionOfTasks, setCollectionOfTasks } = useTasks();
     const [isEdit, setIsEdit] = useState(isFocusOnNew);
     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    // const { showModal } = useGlobalModalContext();
+
+    const createModal = () => {
+    // showModal('TASK_DETAILS_MODAL', {
+    //         title: "Create instance form",
+    //         confirmBtn: "Save"
+    //     });
+    };
 
     const switchToEdit = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
         setIsEdit(true);
@@ -29,7 +38,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew }) => {
     };
 
     const updateTask = (updatedItem: TTask): void => {
-        setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)))
+        setCollectionOfTasks(prevList => prevList.map(item => (item.id === updatedItem.id ? updatedItem : item)));
     };
 
     const keyPress = (e: React.KeyboardEvent<HTMLInputElement>): void => {
@@ -54,8 +63,9 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew }) => {
     };
 
     const openTaskDetails = (): void => {
-        handleMenuClose();
-        setIsDetailsOpen(true);
+        createModal();
+        // handleMenuClose();
+        // setIsDetailsOpen(true);
     };
 
     const updateCollection = useCallback((updatedList: TTask[]) => {
@@ -167,7 +177,7 @@ const Task: React.FC<TTaskProps> = ({ task, isFocusOnNew }) => {
                         description={task.description}
                         listId={task.listId}
                         taskId={task.id}
-                        setMode={() => { alert('setMode not valid') }}
+                        setMode={() => { alert('setMode not valid'); }}
                     />
                 </>}
         </div>
