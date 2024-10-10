@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 import Task, { type TTaskProps } from '../../../components/Task/Task';
 import type { TTask } from '../../../types/CommonTypes';
 import React from 'react';
-import * as ChangePositionModule from '../../../Utils/ChangePosition';
+import * as ChangePositionModule from '../../../utils/ChangePosition';
 import { ListProvider } from '../../../context/ListsContext';
 import { TaskProvider } from '../../../context/TaskContext';
 

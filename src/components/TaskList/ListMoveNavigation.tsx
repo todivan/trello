@@ -2,7 +2,7 @@ import { East, West } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import type { TList } from '../../types/CommonTypes';
 import { useLists } from '../../context/ListsContext';
-import { changePosition } from '../../Utils/ChangePosition';
+import { changePosition } from '../../utils/ChangePosition';
 import React, { useCallback } from 'react';
 
 export interface TListMoveNavigationProps {

@@ -1,4 +1,4 @@
-import { changePosition, type SortableObject } from '../../../src/Utils/ChangePosition';
+import { changePosition, type SortableObject } from '../../utils/ChangePosition';
 
 // Mock function for updateCollection
 const mockUpdateCollection = jest.fn();

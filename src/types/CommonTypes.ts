@@ -1,4 +1,4 @@
-import { type SortableObject } from '../Utils/ChangePosition';
+import { type SortableObject } from '../utils/ChangePosition';
 import type React from 'react';
 
 export interface TList {

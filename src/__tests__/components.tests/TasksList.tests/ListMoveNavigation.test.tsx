@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import ListMoveNavigation from '../../../components/TaskList/ListMoveNavigation';
 import MockListContext from '../../../__mocks__/MockListContext';
-import * as ChangePositionModule from '../../../Utils/ChangePosition';
+import * as ChangePositionModule from '../../../utils/ChangePosition';
 
 const mockChangePosition = jest.spyOn(ChangePositionModule, 'changePosition');
 
