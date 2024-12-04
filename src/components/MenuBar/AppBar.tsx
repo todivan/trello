@@ -8,10 +8,12 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { Badge, Button } from '@mui/material';
+import { Badge, Button, Menu, MenuItem } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import useUserData from '../../hooks/useUserData';
+import useLogout from '../../hooks/useLogout';
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -58,6 +60,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const menuId = 'primary-search-account-menu';
 
 export default function SearchAppBar () {
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+    const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleProfileMenuClose = () => {
+        setAnchorEl(null);
+    };
+    const handleSignOut = useLogout();
+
+    const userAccount = useUserData();
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -77,7 +92,10 @@ export default function SearchAppBar () {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
                     >
-                        Trello (cover by Ivan)
+                        Trello (cover by
+                        {' '}
+                        {userAccount?.username}
+)
                     </Typography>
                     <Button variant="contained">Workspace</Button>
                     <Button variant="contained">Recent</Button>
@@ -111,10 +129,20 @@ export default function SearchAppBar () {
                             aria-controls={menuId}
                             aria-haspopup="true"
                             color="inherit"
+                            onClick={handleProfileMenuOpen}
                         >
                             <AccountCircle />
                         </IconButton>
                     </Box>
+                    <Menu
+                        id="profile-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleProfileMenuClose}
+                    >
+                        <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
+                    </Menu>
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
                             size="large"

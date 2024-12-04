@@ -3,25 +3,23 @@
  * Licensed under the MIT License.
  */
 
-import { LogLevel } from '@azure/msal-browser';
-
 /**
  * Configuration object to be passed to MSAL instance on creation.
  * For a full list of MSAL.js configuration parameters, visit:
- * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md 
+ * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/configuration.md
  */
 
 export const msalConfig = {
     auth: {
-        clientId: 'e196bdfe-f01a-479a-856c-764a87c98ba5', // This is the ONLY mandatory field that you need to supply.
-        authority: 'https://todivangmail.ciamlogin.com/', // Replace the placeholder with your tenant subdomain 
+        clientId: '92882119-e550-456d-b8d9-982bdf647eb1', // This is the ONLY mandatory field that you need to supply.
+        authority: 'https://TrialTenantp37M6HvF.ciamlogin.com/', // Replace the placeholder with your tenant subdomain
         redirectUri: 'http://localhost:3000/', // Points to window.location.origin. You must register this URI on Azure Portal/App Registration.
         postLogoutRedirectUri: '/', // Indicates the page to navigate after logout.
-        navigateToLoginRequestUrl: false, // If "true", will navigate back to the original request location before processing the auth code response.
+        navigateToLoginRequestUrl: false // If "true", will navigate back to the original request location before processing the auth code response.
     },
     cache: {
         cacheLocation: 'sessionStorage', // Configures cache location. "sessionStorage" is more secure, but "localStorage" gives you SSO between tabs.
-        storeAuthStateInCookie: false, // Set this to "true" if you are having issues on IE11 or Edge
+        storeAuthStateInCookie: false // Set this to "true" if you are having issues on IE11 or Edge
     },
     system: {
         loggerOptions: {
@@ -29,25 +27,15 @@ export const msalConfig = {
                 if (containsPii) {
                     return;
                 }
-                switch (level) {
-                    case LogLevel.Error:
-                        console.error(message);
-                        return;
-                    case LogLevel.Info:
-                        console.info(message);
-                        return;
-                    case LogLevel.Verbose:
-                        console.debug(message);
-                        return;
-                    case LogLevel.Warning:
-                        console.warn(message);
-                        return;
-                    default:
-                        return;
-                }
-            },
-        },
-    },
+
+                console.error(message);
+            }
+        }
+    }
+};
+
+export const redirectRequest = {
+    scopes: ['User.Read'] // Adjust scopes based on your application's needs
 };
 
 /**
@@ -57,7 +45,7 @@ export const msalConfig = {
  * https://docs.microsoft.com/azure/active-directory/develop/v2-permissions-and-consent#openid-connect-scopes
  */
 export const loginRequest = {
-    scopes: [],
+    scopes: []
 };
 
 /**

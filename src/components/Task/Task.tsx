@@ -6,9 +6,9 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import NorthIcon from '@mui/icons-material/North';
 import SouthIcon from '@mui/icons-material/South';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import { changePosition } from '../../utils/ChangePosition';
 import TaskDetails from './TaskDetails';
 import { useTasks } from '../../context/TaskContext';
+import { changePosition } from '../../Utils/ChangePosition';
 
 export interface TTaskProps {
     key: React.Key

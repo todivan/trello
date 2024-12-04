@@ -1,5 +1,5 @@
 import { Table } from 'react-bootstrap';
-import { createClaimsTable } from '../utils/claimUtils';
+import { createClaimsTable } from '../Utils/claimUtils';
 
 //import '../styles/App.css';
 

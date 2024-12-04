@@ -19,24 +19,26 @@ export const NavigationBar = () => {
      * only render their children if a user is authenticated or unauthenticated, respectively.
      */
     return (
-        <>
-            <Navbar bg="primary" variant="dark" className="navbarStyle">
-                <a className="navbar-brand" href="/">
+        <Navbar
+            bg="primary"
+            variant="dark"
+            className="navbarStyle"
+        >
+            <a className="navbar-brand" href="/">
                     Microsoft identity platform
-                </a>
-                <AuthenticatedTemplate>
-                    <div className="collapse navbar-collapse justify-content-end">
-                        <Button variant="warning" onClick={handleLogoutRedirect}>
+            </a>
+            <AuthenticatedTemplate>
+                <div className="collapse navbar-collapse justify-content-end">
+                    <Button variant="warning" onClick={handleLogoutRedirect}>
                             Sign out
-                        </Button>
-                    </div>
-                </AuthenticatedTemplate>
-                <UnauthenticatedTemplate>
-                    <div className="collapse navbar-collapse justify-content-end">
-                        <Button onClick={handleLoginRedirect}>Sign in</Button>
-                    </div>
-                </UnauthenticatedTemplate>
-            </Navbar>
-        </>
+                    </Button>
+                </div>
+            </AuthenticatedTemplate>
+            <UnauthenticatedTemplate>
+                <div className="collapse navbar-collapse justify-content-end">
+                    <Button onClick={handleLoginRedirect}>Sign in</Button>
+                </div>
+            </UnauthenticatedTemplate>
+        </Navbar>
     );
 };
